@@ -116,21 +116,27 @@ Here’s a simple table:
 
 #figure(
   table(
-    columns: 3,
-    table.header[Name][Age][Role],
-    "Alice", "24", "Engineer",
-    "Bob", "30", "Designer",
-    "Carol", "28", "Researcher",
+    columns: 4,
+    table.header[Name][Age][Role][Lorem],
+    "Alice", "24", "Engineer", lorem(8),
+    "Bob", "30", "Designer", lorem(8),
+    "Carol", "28", "Researcher", lorem(7),
   ),
   caption: [Example table],
-)
+) <table-1>
 
 
 == Figures
 #figure(
   image("example.png", width: 60%),
   caption: [An example image with caption.],
-)
+) <image-1>
+#figure(
+  image("example.png", width: 60%),
+  caption: [An example image with caption.],
+) <image-2>
+
+A reference to an image (see @image-1[] and @image-2 and @table-1)
 
 == Footnotes
 This is a sentence with a footnote. #footnote("This is the footnote text.")

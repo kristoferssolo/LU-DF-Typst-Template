@@ -1,3 +1,6 @@
+#import "@preview/headcount:0.1.0": *
+#import "@preview/tablex:0.0.9": tablex
+
 #let indent = 1cm
 #let indent-par(body) = par(h(indent) + body)
 
@@ -48,6 +51,7 @@
     ]
   ]
 }
+
 
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
@@ -152,25 +156,72 @@
     } else {
       text(12pt, it)
     }
-    ""
-    v(-indent)
   }
 
 
   // Style bibliography.
-  // show std.bibliography: set block(spacing: 0.5em)
   set std.bibliography(title: "Izmantotā literatūra un avoti")
 
   set quote(block: true)
 
   show table.cell.where(y: 0): strong
 
+  // Tables & figures
+  set figure(numbering: dependent-numbering("1.1."))
+
+  show figure.where(kind: image): set figure(supplement: "att")
+  show figure.caption.where(kind: image): set align(start)
+  show figure.where(kind: image): set figure.caption(
+    position: bottom,
+    separator: ". ",
+  )
+  show heading: reset-counter(counter(figure.where(kind: image)))
+
+  show figure.where(kind: table): set figure(supplement: "tabula")
+  show figure.caption.where(kind: table): set align(end)
+  show figure.where(kind: table): set figure.caption(
+    position: top,
+    separator: " ",
+  )
+  show heading: reset-counter(counter(figure.where(kind: table)))
+
+  show figure.where(kind: raw): set figure.caption(position: top)
+
+  show figure.where(kind: "attachment"): set figure.caption(position: top)
+
+
+  // Adapt supplement in caption independently from supplement used for references.
+  show figure: fig => {
+    let prefix = fig.supplement
+    let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
+    // Wrap figure captions in block to prevent the creation of paragraphs. In
+    // particular, this means `par.first-line-indent` does not apply.
+    // See https://github.com/typst/templates/pull/73#discussion_r2112947947.
+    show figure.caption: it => block[
+      #emph([#numbers~#prefix#it.separator])*#it.body*
+    ]
+    fig
+  }
+
+  // Code blocks
+  show raw: set text(
+    font: (
+      "TeX Gyre Cursor",
+      "JetBrainsMono NF",
+      "JetBrains Mono",
+      "Fira Code",
+    ),
+    features: (calt: 0),
+    ligatures: false,
+    spacing: 100%,
+  )
+
 
   // Main body.
   set par(
     justify: true,
     leading: 1.5em,
-    first-line-indent: indent,
+    first-line-indent: (amount: indent, all: true),
     spacing: 1.5em,
   )
 
@@ -242,4 +293,5 @@
   // Display bibliography.
   bibliography
 }
+
 
