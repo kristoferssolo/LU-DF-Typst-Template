@@ -168,6 +168,8 @@
 
   // Tables & figures
   set figure(numbering: dependent-numbering("1.1."))
+  show figure: set figure.caption(position: top, separator: " ")
+  show figure.caption: set align(end)
 
   show figure.where(kind: image): set figure(supplement: "att")
   show figure.caption.where(kind: image): set align(start)
@@ -178,30 +180,67 @@
   show heading: reset-counter(counter(figure.where(kind: image)))
 
   show figure.where(kind: table): set figure(supplement: "tabula")
-  show figure.caption.where(kind: table): set align(end)
-  show figure.where(kind: table): set figure.caption(
-    position: top,
-    separator: " ",
-  )
   show heading: reset-counter(counter(figure.where(kind: table)))
 
-  show figure.where(kind: raw): set figure.caption(position: top)
-
-  show figure.where(kind: "attachment"): set figure.caption(position: top)
+  show figure.where(kind: "attachment"): set figure(numbering: "1.1.")
+  show figure.where(kind: "attachment"): set figure.caption(separator: ". ")
 
 
   // Adapt supplement in caption independently from supplement used for references.
   show figure: fig => {
-    let prefix = fig.supplement
     let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
     // Wrap figure captions in block to prevent the creation of paragraphs. In
     // particular, this means `par.first-line-indent` does not apply.
     // See https://github.com/typst/templates/pull/73#discussion_r2112947947.
     show figure.caption: it => block[
-      #emph([#numbers~#prefix#it.separator])*#it.body*
+      #emph([#numbers~#fig.supplement#it.separator])*#it.body*
+    ]
+    show figure.caption.where(kind: "attachment"): it => block[
+      #numbers~#fig.supplement#it.separator#it.body
     ]
     fig
   }
+
+  // disable default reference suppliments
+  set ref(supplement: it => {})
+
+  // Custom show rule for references
+  show ref: it => {
+    let el = it.element
+    if el == none {
+      return it
+    }
+
+
+    let numbers = numbering(
+      el.numbering,
+      ..counter(el.func()).at(el.location()),
+    )
+
+    if el.func() == heading {
+      return link(
+        el.location(),
+        [#numbers #el.body],
+      )
+    }
+
+
+    let supplement = if type(it.supplement) == content {
+      if it.supplement == [] {
+        ""
+      } else {
+        [~#it.supplement]
+      }
+    } else {
+      [~#it.supplement]
+    }
+
+    if el.func() == figure {
+      return link(el.location(), [#numbers#supplement])
+    }
+    it
+  }
+
 
   // Code blocks
   show raw: set text(

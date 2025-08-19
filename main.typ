@@ -108,8 +108,9 @@ They can span multiple lines.
   any rate, that what I do not know I do not think I know either.
 ]
 
-== Links
-Here is a #link("https://typst.app")[Typst website].
+== Links <title>
+Here is a https://typst.app and
+here is a with a label -- #link("https://typst.app")[Typst website].
 
 == Table
 Here’s a simple table:
@@ -132,16 +133,38 @@ Here’s a simple table:
   caption: [An example image with caption.],
 ) <image-1>
 #figure(
-  image("example.png", width: 60%),
+  image("example.png"),
   caption: [An example image with caption.],
 ) <image-2>
 
+- @image-1[]
+- @image-2
+- @table-1
+- @table-1[tabulu]
+- @title
+- @code[pielikumu]
+
 A reference to an image (see @image-1[] and @image-2 and @table-1)
+
 
 == Footnotes
 This is a sentence with a footnote. #footnote("This is the footnote text.")
 
 == References
-We can reference @typst in text.
+// We can reference @typst in text.
 
+
+#figure(
+  caption: "Some caption",
+  kind: "attachment",
+  supplement: "pielikums",
+  ```rust
+  #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+  #[cfg_attr(feature = "bevy_reflect", derive(bevy_reflect::Reflect))]
+  #[cfg_attr(feature = "bevy", derive(Component))]
+  #[cfg_attr(feature = "bevy", reflect(Component))]
+  #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+  pub struct Walls(u8);
+  ```,
+)<code>
 
