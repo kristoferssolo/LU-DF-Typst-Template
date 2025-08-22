@@ -2,7 +2,7 @@
 name = "solo-lu-df"
 version = "0.0.1"
 compiler = "0.13.0"
-entrypoint = "lib.typ"
+entrypoint = "src/lib.typ"
 repository = "https://github.com/kristoferssolo/LU-DF-Typst-Template"
 authors = ["Kristofers Solo <dev@kristofers.xyz>"]
 license = "MIT"

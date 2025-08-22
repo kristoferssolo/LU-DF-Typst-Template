@@ -1,5 +1,5 @@
 #import "@preview/headcount:0.1.0": *
-#import "utils.typ": render-abstract
+#import "utils.typ": make-abstract, make-documentary-page, make-title
 
 #let indent = 1cm
 
@@ -217,44 +217,17 @@
   )
 
 
-  // Display the paper's title and authors at the top of the page,
-  // spanning all columns (hence floating at the scope of the
-  // columns' parent, which is the page).
-  // The page can contain a logo if you pass one with `logo: "logo.png"`.
-  align(center, upper(text(size: 16pt, [
-    #university\
-    #faculty
-  ])))
-
-  v(1fr)
-
-  align(center, upper(text(20pt, weight: "bold", title)))
-
-  v(0.2fr)
-
-  align(center, upper(text(size: 16pt, thesis-type)))
-
-  v(1fr)
-
-  // Author information
-  context [
-    #set par(first-line-indent: 0pt)
-    #if authors.len() > 1 { "Autori:" } else { "Autors:" }
-    #authors.map(author => strong(author.name)).join(", ")
-
-    #if authors.len() > 1 { "Studentu" } else { "Studenta" }
-    apliecības Nr.: #authors.map(author => author.code).join(", ")
-
-    #if advisors.len() > 0 [
-      Darba #if advisors.len() > 1 { "vadītāji:" } else { "vadītājs:" }
-      #advisors.map(advisor => [#advisor.title #advisor.name]).join("\n")
-    ]
-  ]
-
-  v(0.5fr)
-
-  align(center, upper([#place #date.year]))
-
+  make-title(
+    title,
+    authors,
+    advisors,
+    university,
+    faculty,
+    thesis-type,
+    date,
+    place,
+    logo,
+  )
 
   // Start page numbering
   set page(numbering: "1", number-align: center)
@@ -262,8 +235,8 @@
 
   // Display abstract and keywords.
   if abstract != none {
-    render-abstract("primary", abstract.primary)
-    render-abstract("secondary", abstract.secondary)
+    make-abstract("primary", abstract.primary)
+    make-abstract("secondary", abstract.secondary)
   }
 
   // Table of contents.
@@ -279,4 +252,6 @@
 
   // Display bibliography.
   bibliography
+
+  make-documentary-page()
 }
