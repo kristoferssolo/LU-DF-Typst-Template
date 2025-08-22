@@ -1,62 +1,12 @@
 #import "@preview/headcount:0.1.0": *
-#import "@preview/tablex:0.0.9": tablex
+#import "utils.typ": render-abstract
 
 #let indent = 1cm
-#let indent-par(body) = par(h(indent) + body)
-
-#let merge(a, b) = {
-  let result = a
-  for (k, v) in b { result.at(k) = v }
-  result
-}
-
-#let render-abstract(role, abstract) = {
-  // Define role-based defaults
-  let defaults = if role == "primary" {
-    (
-      lang: "lv",
-      title: "Anotācija",
-      keyword-title: "Atslēgvārdi",
-      text: [],
-      keywords: [],
-    )
-  } else {
-    (
-      lang: "en",
-      title: "Abstract",
-      keyword-title: "Keywords",
-      text: [],
-      keywords: [],
-    )
-  }
-
-  // Merge defaults with overrides
-  let abs = merge(defaults, abstract)
-
-  context [
-    #set text(lang: abs.lang)
-    #heading(
-      level: 1,
-      outlined: false,
-      numbering: none,
-      abs.title,
-    )
-
-    // Abstract body text
-    #abs.text
-
-    // Keywords
-    #par(first-line-indent: 0cm)[
-      *#abs.keyword-title*: #abs.keywords.join(", ").
-    ]
-  ]
-}
-
 
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
 #let ludf(
-  title: [Paper Title],
+  title: [Title],
   // An array of authors. For each author you can specify a name,
   // location, and email. Everything but but the `name` and `code` is optional.
   authors: (),
@@ -83,11 +33,14 @@
   university: "Latvijas Universitāte",
   faculty: [Eksakto zinātņu un tehnoloģiju fakultāte\ Datorikas nodaļa],
   thesis-type: "Bakalaura darbs",
-  date: none,
+  date: (
+    year: none,
+    month: none,
+    day: none,
+  ),
   place: none,
   logo: none,
   outline-title: "SATURS",
-  replace-math-dot-with-comma: true,
   body,
 ) = {
   // Set document metadata.
@@ -95,7 +48,10 @@
 
   // Set the body font.
   set text(
-    font: ("Times New Roman", "New Computer Modern", "TeX Gyre Termes"),
+    font: (
+      "Times New Roman",
+      "New Computer Modern",
+    ),
     size: 12pt,
     hyphenate: auto,
     lang: "lv",
@@ -109,21 +65,20 @@
   )
 
 
+  // Main body.
+  set par(
+    justify: true,
+    leading: 1.5em,
+    spacing: 1.5em,
+    first-line-indent: (amount: indent, all: true),
+  )
+
+
   // Configure equation numbering and spacing.
   set math.equation(numbering: "(1)")
   show math.equation: set block(spacing: 0.65em)
   // show math.equation: set text(weight: 400)
 
-  // replace `.` with `,`
-  if replace-math-dot-with-comma == true {
-    show math.equation: it => {
-      show regex("\d+\.\d+"): num => {
-        show ".": math.class("normal", ",")
-        num
-      }
-      it
-    }
-  }
 
   // Configure appearance of equation references
   show ref: it => {
@@ -148,7 +103,7 @@
 
   // Headings
   set heading(numbering: "1.1.")
-  show heading: set block(spacing: 1.5em)
+  show heading: set block(spacing: 2em)
   show heading: it => {
     if it.level == 1 {
       pagebreak(weak: true)
@@ -164,15 +119,20 @@
 
   set quote(block: true)
 
-  show table.cell.where(y: 0): strong
-
   // Tables & figures
+  show figure: set block(breakable: true) // allow for tables to span to next pages mid sentence
+  show figure: set par(justify: false) // disable justify for figures (tables)
+  show table.cell.where(y: 0): strong
+  set table(align: left)
+  show figure: set image(width: 80%)
+
   set figure(numbering: dependent-numbering("1.1."))
   show figure: set figure.caption(position: top, separator: " ")
   show figure.caption: set align(end)
 
   show figure.where(kind: image): set figure(supplement: "att")
   show figure.caption.where(kind: image): set align(start)
+  show figure.caption: set text(size: 11pt)
   show figure.where(kind: image): set figure.caption(
     position: bottom,
     separator: ". ",
@@ -202,7 +162,7 @@
   }
 
   // disable default reference suppliments
-  set ref(supplement: it => {})
+  // set ref(supplement: it => {})
 
   // Custom show rule for references
   show ref: it => {
@@ -216,6 +176,7 @@
       el.numbering,
       ..counter(el.func()).at(el.location()),
     )
+
 
     if el.func() == heading {
       return link(
@@ -245,23 +206,14 @@
   // Code blocks
   show raw: set text(
     font: (
-      "TeX Gyre Cursor",
       "JetBrainsMono NF",
       "JetBrains Mono",
       "Fira Code",
+      "TeX Gyre Cursor",
     ),
     features: (calt: 0),
     ligatures: false,
     spacing: 100%,
-  )
-
-
-  // Main body.
-  set par(
-    justify: true,
-    leading: 1.5em,
-    first-line-indent: (amount: indent, all: true),
-    spacing: 1.5em,
   )
 
 
@@ -285,27 +237,23 @@
   v(1fr)
 
   // Author information
-  align(right, [
-    #text(
-      weight: "bold",
-      "Darba " + if authors.len() > 1 { "autori:" } else { "autors:" },
-    )\
-    #authors.map(author => [#author.name, #author.code]).join("\n")
+  context [
+    #set par(first-line-indent: 0pt)
+    #if authors.len() > 1 { "Autori:" } else { "Autors:" }
+    #authors.map(author => strong(author.name)).join(", ")
 
-    #v(1em)
+    #if authors.len() > 1 { "Studentu" } else { "Studenta" }
+    apliecības Nr.: #authors.map(author => author.code).join(", ")
 
     #if advisors.len() > 0 [
-      #text(
-        weight: "bold",
-        "Darba " + if advisors.len() > 1 { "vadītāji:" } else { "vadītājs:" },
-      )\
+      Darba #if advisors.len() > 1 { "vadītāji:" } else { "vadītājs:" }
       #advisors.map(advisor => [#advisor.title #advisor.name]).join("\n")
     ]
-  ])
+  ]
 
   v(0.5fr)
 
-  align(center, upper([#place #date]))
+  align(center, upper([#place #date.year]))
 
 
   // Start page numbering
@@ -332,5 +280,3 @@
   // Display bibliography.
   bibliography
 }
-
-
