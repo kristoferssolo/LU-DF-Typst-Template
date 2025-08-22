@@ -22,9 +22,11 @@
       name: "Ivars Ozoliņš",
     ),
   ),
-  date: (
+  date: datetime(
     year: 2025,
-  ),
+    month: 1,
+    day: 1,
+  ), // defaults to datetime.today()
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),
   abstract: (

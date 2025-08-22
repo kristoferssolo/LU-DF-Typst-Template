@@ -11,6 +11,7 @@
   // location, and email. Everything but but the `name` and `code` is optional.
   authors: (),
   advisors: (),
+  reviewer: (),
   // The paper's abstract. Can be omitted if you don't have one.
   abstract: (
     primary: (
@@ -33,11 +34,7 @@
   university: "Latvijas Universitāte",
   faculty: [Eksakto zinātņu un tehnoloģiju fakultāte\ Datorikas nodaļa],
   thesis-type: "Bakalaura darbs",
-  date: (
-    year: none,
-    month: none,
-    day: none,
-  ),
+  date: datetime.today(),
   place: none,
   logo: none,
   outline-title: "SATURS",
@@ -253,5 +250,12 @@
   // Display bibliography.
   bibliography
 
-  make-documentary-page()
+  make-documentary-page(
+    title,
+    authors,
+    advisors,
+    reviewer,
+    thesis-type,
+    date,
+  )
 }

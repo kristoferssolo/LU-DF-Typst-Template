@@ -92,7 +92,68 @@
 
   v(0.5fr)
 
-  align(center, upper([#place #date.year]))
+  align(center, upper([#place #date.year()]))
 }
 
-#let make-documentary-page() = {}
+#let make-documentary-page(
+  title,
+  authors,
+  advisors,
+  reviewer,
+  thesis-type,
+  date,
+) = {
+  let vspace = 1fr
+  set page(numbering: none)
+
+  let formatted-date = strong(date.display("[day].[month].[year]."))
+
+  heading(level: 1, outlined: false, numbering: none, "Dokumentārā lapa")
+  [
+    #thesis-type "*#title*" ir
+    izstrādāts Latvijas Universitātes Eksakto zinātņu un tehnoloģiju fakultātē,
+    Datorikas nodaļā.
+
+    #v(vspace / 3)
+    Ar savu parakstu apliecinu, ka darbs izstrādāts patstāvīgi, izmantoti tikai tajā
+    norādītie informācijas avoti un iesniegtā darba elektroniskā kopija atbilst
+    izdrukai un/vai recenzentam uzrādītajai darba versijai.
+  ]
+
+  context {
+    set par(
+      first-line-indent: 1cm,
+      hanging-indent: 1cm,
+    )
+
+    v(vspace / 2)
+
+    [
+      #if authors.len() > 1 { "Autori: " } else { "Autors: " }
+      #authors.map(author => [*#author.name, #author.code*]).join(", ")
+      ~ #formatted-date
+    ]
+
+    v(vspace)
+    [
+      Rekomendēju darbu aizstāvēšanai\
+      #if advisors.len() > 0 [
+        Darba #if advisors.len() > 1 { "vadītāji:" } else { "vadītājs:" }
+        #advisors.map(advisor => [*#advisor.title #advisor.name*]).join("\n")
+        ~ #formatted-date
+      ]
+    ]
+
+    v(vspace)
+    [Recenzents: *#reviewer.name*]
+
+
+    v(vspace)
+    [
+      Darbs iesniegs #formatted-date\
+      Kvalifikācijas darbu pārbaudījumu komisijas sekretārs (elektronisks paraksts)
+    ]
+
+    v(vspace)
+  }
+}

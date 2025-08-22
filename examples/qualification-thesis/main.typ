@@ -21,8 +21,19 @@
       email: "zk67890@edu.lu.lv",
     ),
   ),
-  date: (
+  advisors: (
+    (
+      title: "Mg. dat.",
+      name: "Ivars Ozoliņš",
+    ),
+  ),
+  reviewer: (
+    name: "Jānis Ozols",
+  ),
+  date: datetime(
     year: 2025,
+    month: 1,
+    day: 1,
   ),
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),
