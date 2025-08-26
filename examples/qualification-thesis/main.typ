@@ -153,7 +153,7 @@ Skatīt @dpd-0
 ) <dpd-1>
 
 === Funkciju sadalījums moduļos
-Funkciju sadalījums moduļos ir aprakstīts tabulā (@function-modules[tab]).
+Funkciju sadalījums moduļos ir aprakstīts tabulā (@function-modules[tab.]).
 
 #figure(
   caption: "Funkciju sadalījums pa moduļiem",

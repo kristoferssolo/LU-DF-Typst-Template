@@ -1,4 +1,3 @@
-#import "@preview/headcount:0.1.0": *
 #import "utils.typ": make-abstract, make-documentary-page, make-title
 
 #let indent = 1cm
@@ -38,6 +37,7 @@
   place: none,
   logo: none,
   outline-title: "SATURS",
+  attachments: none,
   body,
 ) = {
   // Set document metadata.
@@ -77,21 +77,6 @@
   // show math.equation: set text(weight: 400)
 
 
-  // Configure appearance of equation references
-  show ref: it => {
-    if it.element != none and it.element.func() == math.equation {
-      // Override equation references.
-      link(it.element.location(), numbering(
-        it.element.numbering,
-        ..counter(math.equation).at(it.element.location()),
-      ))
-    } else {
-      // Other references as usual.
-      it
-    }
-  }
-
-
   // Configure lists and terms.
   set list(marker: ([•], [--], [\*], [·]))
   set enum(numbering: "1aiA)")
@@ -117,15 +102,27 @@
   set quote(block: true)
 
   // Tables & figures
+  show heading.where(level: 1): it => {
+    let kinds = query(figure).map(fig => fig.kind).dedup()
+    for kind in kinds {
+      counter(figure.where(kind: kind)).update(0)
+    }
+    it
+  }
+
+  set figure(numbering: it => {
+    let count = counter(heading).get()
+    numbering("1.1.", count.first(), it)
+  })
+
   show figure: set block(breakable: true) // allow for tables to span to next pages mid sentence
   show figure: set par(justify: false) // disable justify for figures (tables)
+  show figure.caption: set align(end)
   show table.cell.where(y: 0): strong
   set table(align: left)
-  show figure: set image(width: 80%)
 
-  set figure(numbering: dependent-numbering("1.1."))
+  show figure: set image(width: 80%)
   show figure: set figure.caption(position: top, separator: " ")
-  show figure.caption: set align(end)
 
   show figure.where(kind: image): set figure(supplement: "att")
   show figure.caption.where(kind: image): set align(start)
@@ -134,10 +131,8 @@
     position: bottom,
     separator: ". ",
   )
-  show heading: reset-counter(counter(figure.where(kind: image)))
 
   show figure.where(kind: table): set figure(supplement: "tabula")
-  show heading: reset-counter(counter(figure.where(kind: table)))
 
   show figure.where(kind: "attachment"): set figure(numbering: "1.1.")
   show figure.where(kind: "attachment"): set figure.caption(separator: ". ")
@@ -158,9 +153,6 @@
     fig
   }
 
-  // disable default reference suppliments
-  // set ref(supplement: it => {})
-
   // Custom show rule for references
   show ref: it => {
     let el = it.element
@@ -168,38 +160,51 @@
       return it
     }
 
-
     let numbers = numbering(
       el.numbering,
       ..counter(el.func()).at(el.location()),
     )
 
-    // return el.supplement
-
-
-    if el.func() == heading {
-      return link(
-        el.location(),
-        [#numbers #el.body],
-      )
+    // Handle math equations
+    // (No supplement handling needed)
+    if el.func() == math.equation {
+      return link(it.element.location(), numbers)
     }
 
-
-    let supplement = if type(it.supplement) == content {
-      // supplement provided by user
-      if it.supplement == [] {
-        "" // empty supplement
-      } else {
-        [~#it.supplement.]
+    let get-supplement(default) = {
+      if type(it.supplement) == content {
+        // Supplement provided by user in the ref, e.g., ref(..., supplement: "foo")
+        if it.supplement == [] {
+          return ""
+        }
+        return [~#it.supplement]
       }
-    } else {
-      // fallback to default
-      [~#el.supplement.]
+      // Fallback to the figure's default supplement, e.g., figure(..., supplement: "att.")
+      [~#default]
     }
 
-    if el.func() == figure {
+    // Handle headings
+    // (With supplement handling)
+    if el.func() == heading {
+      let supplement = get-supplement(el.body)
       return link(el.location(), [#numbers#supplement])
     }
+
+    // Handle figures
+    // (With supplement handling)
+    if el.func() == figure {
+      // Override figure references.
+      let chap = counter(heading).at(el.location()).first()
+      let fig_num = counter(figure.where(kind: el.kind))
+        .at(el.location())
+        .first()
+      let numbers = numbering("1.1.", chap, fig_num)
+
+      let supplement = get-supplement(el.supplement)
+
+      return link(el.location(), [#numbers#supplement])
+    }
+
     it
   }
 
@@ -253,6 +258,7 @@
 
   // Display bibliography.
   bibliography
+
 
   make-documentary-page(
     title,
