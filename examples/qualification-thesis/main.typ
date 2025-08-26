@@ -272,7 +272,7 @@ Skatīt @logical-erd
 ) <logical-erd>
 
 === Datu bāzes fiziskais ER modelis
-Skatīt @physical-erd[attēlu].
+Skatīt @physical-erd[]
 
 #figure(
   caption: "Datu bāzes loģiskais ER modelis",

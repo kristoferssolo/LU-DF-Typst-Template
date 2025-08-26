@@ -174,6 +174,8 @@
       ..counter(el.func()).at(el.location()),
     )
 
+    // return el.supplement
+
 
     if el.func() == heading {
       return link(
@@ -184,13 +186,15 @@
 
 
     let supplement = if type(it.supplement) == content {
+      // supplement provided by user
       if it.supplement == [] {
-        ""
+        "" // empty supplement
       } else {
-        [~#it.supplement]
+        [~#it.supplement.]
       }
     } else {
-      [~#it.supplement]
+      // fallback to default
+      [~#el.supplement.]
     }
 
     if el.func() == figure {
