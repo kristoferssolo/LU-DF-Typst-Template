@@ -1,6 +1,16 @@
-#import "utils.typ": make-abstract, make-documentary-page, make-title
+#import "utils.typ": (
+  make-abstract, make-attachments, make-documentary-page, make-title,
+)
 
 #let indent = 1cm
+
+#let attachment(caption: none, label: none, body) = {
+  (
+    content: body,
+    caption: caption,
+    label: label,
+  )
+}
 
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
@@ -36,8 +46,9 @@
   date: datetime.today(),
   place: none,
   logo: none,
-  outline-title: "SATURS",
-  attachments: none,
+  outline-title: "Saturs",
+  attachments: (),
+  attachment-title: "Pielikumi",
   body,
 ) = {
   // Set document metadata.
@@ -134,7 +145,7 @@
 
   show figure.where(kind: table): set figure(supplement: "tabula")
 
-  show figure.where(kind: "attachment"): set figure(numbering: "1.1.")
+  show figure.where(kind: "attachment"): set figure(numbering: "1.")
   show figure.where(kind: "attachment"): set figure.caption(separator: ". ")
 
 
@@ -152,6 +163,7 @@
     ]
     fig
   }
+
 
   // Custom show rule for references
   show ref: it => {
@@ -198,7 +210,11 @@
       let fig_num = counter(figure.where(kind: el.kind))
         .at(el.location())
         .first()
-      let numbers = numbering("1.1.", chap, fig_num)
+      let numbers = if el.kind == "attachment" {
+        numbering("1.", fig_num)
+      } else {
+        numbering("1.1.", chap, fig_num)
+      }
 
       let supplement = get-supplement(el.supplement)
 
@@ -247,11 +263,14 @@
 
   // Table of contents.
   // Uppercase 1st level headings in ToC
-  show outline.entry.where(level: 1): it => {
-    upper(it)
-  }
+  show outline.entry.where(level: 1): it => { upper(it) }
 
-  outline(depth: 3, indent: indent, title: text(size: 14pt, outline-title))
+  outline(
+    depth: 3,
+    indent: indent,
+    title: text(size: 14pt, outline-title),
+    target: heading.where().or(figure.where(kind: "attachment")),
+  )
 
   // Display the paper's contents.
   body
@@ -259,6 +278,7 @@
   // Display bibliography.
   bibliography
 
+  make-attachments(attachment-title, attachments)
 
   make-documentary-page(
     title,

@@ -157,3 +157,31 @@
     v(vspace)
   }
 }
+
+#let make-attachments(title, attachments) = {
+  if attachments == () {
+    return
+  }
+  heading(level: 1, title, numbering: none)
+
+  for (i, att) in attachments.enumerate() {
+    let content = att.content
+    let caption = att.caption
+    let user-label = att.label
+
+    let final-label = if user-label != none {
+      user-label
+    } else {
+      label("attachment-" + str(i + 1))
+    }
+
+    [#figure(
+        content,
+        caption: caption,
+        kind: "attachment",
+        supplement: "pielikums",
+      )
+      #final-label
+    ]
+  }
+}
