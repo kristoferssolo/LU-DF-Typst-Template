@@ -20,7 +20,7 @@
   // location, and email. Everything but but the `name` and `code` is optional.
   authors: (),
   advisors: (),
-  reviewer: (),
+  reviewer: (name: ""),
   // The paper's abstract. Can be omitted if you don't have one.
   abstract: (
     primary: (

@@ -10,7 +10,7 @@ title/abstract/attachments, and a ready-to-edit example.
 Use the template in the Typst web app by clicking "Start from template" and
 searching for `solo-lu-df`, or initialize a new project with the CLI:
 
-```bash
+```sh
 typst init @preview/solo-lu-df
 ```
 
@@ -49,7 +49,9 @@ template, you can add a show rule like this at the top of your file:
   authors: (
     (name: "Jānis Bērziņš", code: "jb12345", email: "jb12345@edu.lu.lv"),
   ),
-  advisors: (title: "Mg. dat.", name: "Ivars Ozoliņš"),
+  advisors: (
+    (title: "Mg. dat.", name: "Ivars Ozoliņš"),
+  ),
   date: datetime(year: 2025, month: 1, day: 1),
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),
