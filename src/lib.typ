@@ -28,14 +28,14 @@
       keyword-title: "Atslēgvārdi",
       lang: "lv",
       text: [],
-      keywords: [],
+      keywords: (),
     ),
     secondary: (
       title: "Abstract",
       keyword-title: "Keywords",
       lang: "en",
       text: [],
-      keywords: [],
+      keywords: (),
     ),
   ),
   // The result of a call to the `bibliography` function or `none`.
