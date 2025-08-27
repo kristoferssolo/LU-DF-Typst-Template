@@ -1,6 +1,6 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
 #import fletcher.shapes: cylinder, ellipse
-#import "@preview/solo-lu-df:0.0.1": *
+#import "@preview/solo-lu-df:0.1.0": *
 #import "utils/tables.typ": function-table
 #import "utils/diagrams.typ": data-store, dpd-database, dpd-edge, process
 
@@ -80,7 +80,7 @@
       caption: "Another table",
       table(
         columns: (1fr, 1fr),
-        [foo], [bar],
+        [Column 1], [Column 2],
       ),
     ),
   ),

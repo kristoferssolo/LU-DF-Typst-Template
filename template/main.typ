@@ -1,4 +1,4 @@
-#import "@preview/solo-lu-df:0.0.1": ludf
+#import "@preview/solo-lu-df:0.1.0": *
 
 #show: ludf.with(
   title: "Darba Nosaukums",
@@ -56,6 +56,16 @@
         "foo",
         "bar",
         "baz",
+      ),
+    ),
+  ),
+  attachments: (
+    attachment(
+      caption: "Attachment table",
+      label: <table-1>,
+      table(
+        columns: (1fr, 1fr),
+        [Column 1], [Column 2],
       ),
     ),
   ),
