@@ -69,15 +69,15 @@
   ),
   attachments: (
     attachment(
-      caption: "foo",
-      label: <foo>,
+      caption: "Attachment table",
+      label: <table-1>,
       table(
         columns: (1fr, 1fr),
         [foo], [bar],
       ),
     ),
     attachment(
-      caption: "bar",
+      caption: "Another table",
       table(
         columns: (1fr, 1fr),
         [foo], [bar],

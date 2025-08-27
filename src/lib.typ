@@ -269,7 +269,6 @@
     depth: 3,
     indent: indent,
     title: text(size: 14pt, outline-title),
-    target: heading.where().or(figure.where(kind: "attachment")),
   )
 
   // Display the paper's contents.
