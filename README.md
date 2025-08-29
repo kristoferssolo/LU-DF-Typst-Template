@@ -1,7 +1,7 @@
 # solo-lu-df
 
 A Typst template to write qualification papers, bachelor’s theses, and master’s
-theses for Latvijas Universitāte (Faculty of Science and Technology).
+theses for Latvijas Universitāte (Faculty of Exact Sciences, Computer Science).
 The package provides university-compliant layout rules, helpers for
 title/abstract/attachments, and a ready-to-edit example.
 
@@ -80,7 +80,6 @@ A ready-to-edit qualification thesis example is included in the repository:
 View the example on GitHub: <https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/qualification-thesis>
 
 The example contains `main.typ`, `bibliography.yml` and small helpers under
-    ),
 `utils/`. Use it as a starting point or copy it into a new project.
 
 ## Tips
