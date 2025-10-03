@@ -150,7 +150,7 @@
 
     v(vspace)
     [
-      Darbs iesniegs #formatted-date\
+      Darbs iesniegts #formatted-date\
       Kvalifikācijas darbu pārbaudījumu komisijas sekretārs (elektronisks paraksts)
     ]
 
