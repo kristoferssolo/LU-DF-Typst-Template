@@ -60,18 +60,18 @@
   place,
   logo,
 ) = {
-  align(center, upper(text(size: 16pt, [
+  align(center, upper(text(size: 14pt, [
     #university\
     #faculty
   ])))
 
   v(1fr)
 
-  align(center, upper(text(20pt, weight: "bold", title)))
+  align(center, upper(text(16pt, weight: "bold", title)))
 
   v(0.2fr)
 
-  align(center, upper(text(size: 16pt, thesis-type)))
+  align(center, upper(text(size: 14pt, thesis-type)))
 
   v(1fr)
 
