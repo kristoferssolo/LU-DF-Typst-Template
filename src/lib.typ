@@ -85,7 +85,6 @@
   // Configure equation numbering and spacing.
   set math.equation(numbering: "(1)")
   show math.equation: set block(spacing: 0.65em)
-  // show math.equation: set text(weight: 400)
 
 
   // Configure lists and terms.
