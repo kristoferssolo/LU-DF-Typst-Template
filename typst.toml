@@ -4,7 +4,7 @@ version = "0.1.1"
 entrypoint = "src/lib.typ"
 authors = ["Kristofers Solo <dev@kristofers.xyz>"]
 license = "MIT"
-description = "Write qualification papers, bachelor’s theses, and master’s theses for University of Lativa, Computer Science programme."
+description = "Write qualification papers, bachelor’s theses, and master’s theses for University of Latvia, Computer Science programme."
 repository = "https://github.com/kristoferssolo/LU-DF-Typst-Template"
 keywords = [
   "University of Latvia",
