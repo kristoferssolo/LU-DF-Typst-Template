@@ -1,5 +1,8 @@
 #import "utils.typ": (
-  make-abstract, make-attachments, make-documentary-page, make-title,
+  make-abstract,
+  make-attachments,
+  make-documentary-page,
+  make-title,
 )
 
 #let indent = 1cm
@@ -120,12 +123,16 @@
     it
   }
 
-  set figure(numbering: it => {
-    let count = counter(heading).get()
-    numbering("1.1.", count.first(), it)
-  })
+  set figure(
+    numbering: it => {
+      let count = counter(heading).get()
+      numbering("1.1.", count.first(), it)
+    },
+  )
 
-  show figure: set block(breakable: true) // allow for tables to span to next pages mid sentence
+  show figure: set block(
+    breakable: true,
+  ) // allow for tables to span to next pages mid sentence
   show figure: set par(justify: false) // disable justify for figures (tables)
   show figure.caption: set align(end)
   show table.cell.where(y: 0): strong
@@ -279,7 +286,16 @@
   make-attachments(attachment-title, attachments)
 
   make-documentary-page(
-    title,
+    if type(title) == content {
+      title
+        .fields()
+        .values()
+        .at(0)
+        .filter(it => it.func() != linebreak and it != [ ])
+        .join(" ")
+    } else {
+      title
+    },
     authors,
     advisors,
     reviewer,
