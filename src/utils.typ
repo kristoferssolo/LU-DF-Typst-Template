@@ -132,9 +132,9 @@
     Datorikas nodaļā.
 
     #v(vspace / 3)
-    Ar savu parakstu apliecinu, ka darbs izstrādāts patstāvīgi, izmantoti tikai tajā
-    norādītie informācijas avoti un iesniegtā darba elektroniskā kopija atbilst
-    izdrukai un/vai recenzentam uzrādītajai darba versijai.
+    Ar savu parakstu apliecinu, ka darbs izstrādāts patstāvīgi, izmantoti tikai
+    tajā norādītie informācijas avoti un iesniegtā darba elektroniskā kopija
+    atbilst izdrukai un/vai recenzentam uzrādītajai darba versijai.
   ]
 
   context {
@@ -168,7 +168,7 @@
     v(vspace)
     [
       Darbs iesniegts #formatted-date\
-      Kvalifikācijas darbu pārbaudījumu komisijas sekretārs (elektronisks paraksts)
+      #thesis-type.replace("darbs", "darbu") pārbaudīja komisijas sekretārs (elektronisks paraksts)
     ]
 
     v(vspace)
