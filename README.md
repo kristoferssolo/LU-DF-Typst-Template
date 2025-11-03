@@ -42,7 +42,7 @@ function in a show rule. If you want to change an existing project to use this
 template, you can add a show rule like this at the top of your file:
 
 ```typst
-#import "@preview/solo-lu-df:0.1.1": *
+#import "@preview/solo-lu-df:0.1.2": *
 
 #show: ludf.with(
   title: "Darba Nosaukums",
@@ -67,7 +67,8 @@ template, you can add a show rule like this at the top of your file:
         columns: (1fr, 1fr),
         [Column 1], [Column 2],
       ),
-),
+    ),
+  ),
 )
 
 // Your content goes below.
