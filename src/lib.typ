@@ -1,8 +1,5 @@
 #import "utils.typ": (
-  make-abstract,
-  make-attachments,
-  make-documentary-page,
-  make-title,
+  make-abstract, make-attachments, make-documentary-page, make-title,
 )
 
 #let indent = 1cm
@@ -98,7 +95,7 @@
 
   // Headings
   set heading(numbering: "1.1.")
-  show heading: set block(spacing: 2em)
+  show heading: set block(spacing: 2em, sticky: true)
   show heading: it => {
     if it.level == 1 {
       pagebreak(weak: true)
@@ -143,6 +140,7 @@
 
   show figure.where(kind: image): set figure(supplement: "att")
   show figure.caption.where(kind: image): set align(start)
+  show figure.caption: set block(sticky: true)
   show figure.caption: set text(size: 11pt)
   show figure.where(kind: image): set figure.caption(
     position: bottom,
