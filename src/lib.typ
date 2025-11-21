@@ -49,6 +49,7 @@
   outline-title: "Saturs",
   attachments: (),
   attachment-title: "Pielikumi",
+  display-documentary: true,
   body,
 ) = {
   // Set document metadata.
@@ -283,21 +284,23 @@
 
   make-attachments(attachment-title, attachments)
 
-  make-documentary-page(
-    if type(title) == content {
-      title
-        .fields()
-        .values()
-        .at(0)
-        .filter(it => it.func() != linebreak and it != [ ])
-        .join(" ")
-    } else {
-      title
-    },
-    authors,
-    advisors,
-    reviewer,
-    thesis-type,
-    date,
-  )
+  if display-documentary {
+    make-documentary-page(
+      if type(title) == content {
+        title
+          .fields()
+          .values()
+          .at(0)
+          .filter(it => it.func() != linebreak and it != [ ])
+          .join(" ")
+      } else {
+        title
+      },
+      authors,
+      advisors,
+      reviewer,
+      thesis-type,
+      date,
+    )
+  }
 }
