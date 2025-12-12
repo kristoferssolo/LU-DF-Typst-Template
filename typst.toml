@@ -1,6 +1,6 @@
 [package]
 name = "solo-lu-df"
-version = "0.1.3"
+version = "0.1.4"
 entrypoint = "src/lib.typ"
 authors = ["Kristofers Solo <dev@kristofers.xyz>"]
 license = "MIT-0"
