@@ -2,8 +2,6 @@
   make-abstract, make-attachments, make-documentary-page, make-title,
 )
 
-#let indent = 1cm
-
 #let attachment(caption: none, label: none, body) = {
   (
     content: body,
@@ -73,15 +71,13 @@
     paper: "a4",
   )
 
-
   // Main body.
   set par(
     justify: true,
-    leading: 1.5em,
-    spacing: 1.5em,
-    first-line-indent: (amount: indent, all: true),
+    leading: 0.65em * 1.5,
+    spacing: 0.65em * 1.5,
+    first-line-indent: (amount: 1cm, all: true),
   )
-
 
   // Configure equation numbering and spacing.
   set math.equation(numbering: "(1)")
@@ -96,10 +92,10 @@
 
   // Headings
   set heading(numbering: "1.1.")
-  show heading: set block(spacing: 2em, sticky: true)
+  show heading: set block(spacing: 0.65em * 2, sticky: true)
   show heading: it => {
     if it.level == 1 {
-      pagebreak(weak: true)
+      pagebreak()
       text(14pt, align(center, upper(it)))
     } else {
       text(12pt, it)
@@ -272,7 +268,7 @@
 
   outline(
     depth: 3,
-    indent: indent,
+    indent: 1cm,
     title: text(size: 14pt, outline-title),
   )
 
