@@ -119,61 +119,50 @@
   reviewer,
   thesis-type,
   date,
-) = {
-  let vspace = 1fr
-  set page(numbering: none)
+) = [
+  #set page(numbering: none)
+  #let formatted-date = strong(date.display("[day].[month].[year]."))
 
-  let formatted-date = strong(date.display("[day].[month].[year]."))
+  #heading(level: 1, outlined: false, numbering: none, "Dokumentārā lapa")
 
-  heading(level: 1, outlined: false, numbering: none, "Dokumentārā lapa")
-  [
-    #thesis-type "*#title*" ir
-    izstrādāts Latvijas Universitātes Eksakto zinātņu un tehnoloģiju fakultātē,
-    Datorikas nodaļā.
+  #set par(spacing: 2em)
 
-    #v(vspace / 3)
-    Ar savu parakstu apliecinu, ka darbs izstrādāts patstāvīgi, izmantoti tikai
-    tajā norādītie informācijas avoti un iesniegtā darba elektroniskā kopija
-    atbilst izdrukai un/vai recenzentam uzrādītajai darba versijai.
+  #thesis-type "*#title*" ir
+  izstrādāts Latvijas Universitātes Eksakto zinātņu un tehnoloģiju fakultātē,
+  Datorikas nodaļā.
+
+  Ar savu parakstu apliecinu, ka darbs izstrādāts patstāvīgi, izmantoti tikai
+  tajā norādītie informācijas avoti un iesniegtā darba elektroniskā kopija
+  atbilst izdrukai un/vai recenzentam uzrādītajai darba versijai.
+  #set par(hanging-indent: 1cm)
+
+  #v(0.5fr)
+
+  #if authors.len() > 1 { "Autori: " } else { "Autors: " }
+  #(
+    authors.map(author => [*#author.name, #author.code*]).join(", ")
+  ) ~ #formatted-date
+
+  #v(1fr)
+  Rekomendēju darbu aizstāvēšanai\
+  #if advisors.len() > 0 [
+    Darba #if advisors.len() > 1 { "vadītāji:" } else { "vadītājs:" }
+    #(
+      advisors.map(advisor => [*#advisor.title #advisor.name*]).join("\n")
+    ) ~ #formatted-date
   ]
 
-  context {
-    set par(
-      first-line-indent: 1cm,
-      hanging-indent: 1cm,
-    )
+  #v(1fr)
 
-    v(vspace / 2)
+  Recenzents: *#reviewer.name*
 
-    [
-      #if authors.len() > 1 { "Autori: " } else { "Autors: " }
-      #authors.map(author => [*#author.name, #author.code*]).join(", ")
-      ~ #formatted-date
-    ]
+  #v(1fr)
 
-    v(vspace)
-    [
-      Rekomendēju darbu aizstāvēšanai\
-      #if advisors.len() > 0 [
-        Darba #if advisors.len() > 1 { "vadītāji:" } else { "vadītājs:" }
-        #advisors.map(advisor => [*#advisor.title #advisor.name*]).join("\n")
-        ~ #formatted-date
-      ]
-    ]
+  Darbs iesniegts #formatted-date \
+  #thesis-type.replace("darbs", "darbu") pārbaudīja komisijas sekretārs (elektronisks paraksts)
 
-    v(vspace)
-    [Recenzents: *#reviewer.name*]
-
-
-    v(vspace)
-    [
-      Darbs iesniegts #formatted-date\
-      #thesis-type.replace("darbs", "darbu") pārbaudīja komisijas sekretārs (elektronisks paraksts)
-    ]
-
-    v(vspace)
-  }
-}
+  #v(1fr)
+]
 
 #let make-attachments(title, attachments) = {
   if attachments == () {
