@@ -271,9 +271,6 @@
   }
 
   // Table of contents.
-  // Uppercase 1st level headings in ToC
-  // show outline.entry.where(level: 1): it => { upper(it) }
-
   // Format attachment entries in outline
   show outline.entry: it => {
     let el = it.element
