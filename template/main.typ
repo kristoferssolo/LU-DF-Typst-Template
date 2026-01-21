@@ -69,6 +69,7 @@
       ),
     ),
   ),
+  description: [Some random document description that will be wisible in the metadata],
 )
 
 
