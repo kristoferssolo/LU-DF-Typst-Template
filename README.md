@@ -34,7 +34,10 @@ configure the whole document and `attachment` helper function. Important argumen
 - `bibliography`: Result of `bibliography("path/to/file.yml")` or `none`.
 - `attachments`: Tuple of `attachment(...)` items (tables, figures).
 - `display-documentary`: Whether to display the documentary page at the end. Defaults to `true`.
+- `description`: Document description for PDF metadata. Defaults to `none`.
 - Positional argument: the document body follows the `ludf.with(...)` call.
+
+**Note:** The template automatically extracts keywords from both `primary` and `secondary` abstracts and sets them as PDF document metadata.
 
 The function also accepts a single, positional argument for the body of the paper.
 
@@ -43,7 +46,7 @@ function in a show rule. If you want to change an existing project to use this
 template, you can add a show rule like this at the top of your file:
 
 ```typst
-#import "@preview/solo-lu-df:0.1.4": *
+#import "@preview/solo-lu-df:0.1.5": *
 
 #show: ludf.with(
   title: "Darba Nosaukums",

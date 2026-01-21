@@ -48,10 +48,20 @@
   attachments: (),
   attachment-title: "Pielikumi",
   display-documentary: true,
+  description: none,
   body,
 ) = {
   // Set document metadata.
-  set document(title: title, author: authors.map(author => author.name))
+  set document(
+    title: title,
+    author: authors.map(author => author.name),
+    keywords: abstract
+      .values()
+      .map(it => it.keywords)
+      .flatten()
+      .filter(it => it != none and it != ""),
+    description: description,
+  )
 
   // Set the body font.
   set text(
@@ -124,9 +134,7 @@
     },
   )
 
-  show figure: set block(
-    breakable: true,
-  ) // allow for tables to span to next pages mid sentence
+  show figure: set block(breakable: true) // allow for tables to span to next pages mid sentence
   show figure: set par(justify: false) // disable justify for figures (tables)
   show figure.caption: set align(end)
   show table.cell.where(y: 0): strong
