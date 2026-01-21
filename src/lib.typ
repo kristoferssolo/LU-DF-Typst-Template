@@ -241,6 +241,7 @@
       "JetBrains Mono",
       "Fira Code",
       "TeX Gyre Cursor",
+      "DejaVu Sans Mono",
     ),
     features: (calt: 0),
     ligatures: false,
