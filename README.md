@@ -58,6 +58,7 @@ template, you can add a show rule like this at the top of your file:
   advisors: (
     (title: "Mg. dat.", name: "Ivars Ozoliņš"),
   ),
+  reviewer: (name: "Prof. Anna Liepa"),
   date: datetime(year: 2025, month: 1, day: 1),
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),
