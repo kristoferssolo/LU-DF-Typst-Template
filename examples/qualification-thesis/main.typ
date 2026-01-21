@@ -1,8 +1,10 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
-#import fletcher.shapes: cylinder, ellipse
-#import "@preview/solo-lu-df:0.1.5": *
-#import "utils/tables.typ": function-table
+#import "@preview/solo-lu-df:1.0.0": *
 #import "utils/diagrams.typ": data-store, dpd-database, dpd-edge, process
+#import "utils/tables.typ": function-table
+
+#import fletcher.shapes: cylinder, ellipse
+#import table: cell, header
 
 #show: ludf.with(
   title: "Darba Nosaukums",
@@ -177,12 +179,12 @@ Funkciju sadalījums moduļos ir aprakstīts tabulā (@function-modules[tab.]).
   table(
     columns: (auto, 1fr, auto),
     align: left,
-    table.header([Modulis], [Funkcija], [Identifikators]),
+    header([Modulis], [Funkcija], [Identifikators]),
 
-    table.cell(rowspan: 1)[A modulis],
+    cell(rowspan: 1)[A modulis],
     [A saskarne], [#link(<AF01>)[AF01]],
 
-    table.cell(rowspan: 2)[B modulis],
+    cell(rowspan: 2)[B modulis],
     [B saskarne], [#link(<BF01>)[BF01]],
     [B apstrāde], [#link(<BF02>)[BF02]],
   ),
