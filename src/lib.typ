@@ -272,12 +272,26 @@
 
   // Table of contents.
   // Uppercase 1st level headings in ToC
-  show outline.entry.where(level: 1): it => { upper(it) }
+  // show outline.entry.where(level: 1): it => { upper(it) }
+
+  // Format attachment entries in outline
+  show outline.entry: it => {
+    let el = it.element
+    if el.func() == figure {
+      let num = numbering(el.numbering, ..el.counter.at(el.location()))
+      let pg = counter(page).at(el.location()).first()
+      return block[#link(
+          el.location(),
+        )[#num #el.supplement. #el.caption.body] #box(width: 1fr, it.fill) #pg]
+    }
+    it
+  }
 
   outline(
     depth: 3,
     indent: 1cm,
     title: text(size: 14pt, outline-title),
+    target: selector(heading).or(figure.where(kind: "attachment")),
   )
 
   // Display the paper's contents.

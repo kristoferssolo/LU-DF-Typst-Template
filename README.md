@@ -32,7 +32,7 @@ configure the whole document and `attachment` helper function. Important argumen
 - `abstract`: A record with `primary` and `secondary` abstracts. Each has
   `text` (content) and `keywords` (array) as well as `title`, `lang` and `keyword-title`.
 - `bibliography`: Result of `bibliography("path/to/file.yml")` or `none`.
-- `attachments`: Tuple of `attachment(...)` items (tables, figures).
+- `attachments`: Tuple of `attachment(...)` items (tables, figures). All attachments must be referenced in the document body to appear in the outline.
 - `display-documentary`: Whether to display the documentary page at the end. Defaults to `true`.
 - `description`: Document description for PDF metadata. Defaults to `none`.
 - Positional argument: the document body follows the `ludf.with(...)` call.
