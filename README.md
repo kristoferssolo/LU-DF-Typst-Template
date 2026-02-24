@@ -83,11 +83,15 @@ template, you can add a show rule like this at the top of your file:
 
 ## Examples
 
-A ready-to-edit qualification thesis example is included in the repository:
+Ready-to-edit examples for different thesis types are included:
 
-View the example on GitHub: <https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/qualification-thesis>
+- **Bachelor thesis**: [`examples/bachelor-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/bachelor-thesis)
+- **Course work**: [`examples/course-work/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/course-work)
+- **Qualification thesis**: [`examples/qualification-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/qualification-thesis)
 
-The example contains `main.typ`, `bibliography.yml` and small helpers under
+View the examples on GitHub: <https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples>
+
+The qualification thesis example contains `main.typ`, `bibliography.yml` and small helpers under
 `utils/`. Use it as a starting point or copy it into a new project.
 
 ## Tips
