@@ -1,3 +1,14 @@
+#import "documentary-page.typ": make-documentary-page
+
+#let get-thesis-type-name(thesis-type) = {
+  let thesis-types = (
+    qualification: "Kvalifikācijas darbs",
+    course: "Kursa darbs",
+    bachelor: "Bakalaura darbs",
+  )
+  thesis-types.at(thesis-type, default: str(thesis-type))
+}
+
 #let merge(a, b) = {
   let result = a
   for (k, v) in b { result.at(k) = v }
@@ -88,7 +99,7 @@
 
   v(0.2fr)
 
-  align(center, upper(text(size: 14pt, thesis-type)))
+  align(center, upper(text(size: 14pt, get-thesis-type-name(thesis-type))))
 
   v(1fr)
 
@@ -111,63 +122,6 @@
 
   align(center, upper([#place #date.year()]))
 }
-
-#let make-documentary-page(
-  title,
-  authors,
-  advisors,
-  reviewer,
-  thesis-type,
-  date,
-) = [
-  #set page(numbering: none)
-  #let formatted-date = strong(date.display("[day].[month].[year]."))
-
-  #heading(level: 1, outlined: false, numbering: none, "Dokumentārā lapa")
-
-  #set par(spacing: 2em)
-
-  #thesis-type "*#title*" izstrādāts Latvijas Universitātes Eksakto zinātņu un
-  tehnoloģiju fakultātē.
-
-  Ar savu parakstu apliecinu, ka darbs izstrādāts patstāvīgi, izmantoti tikai
-  tajā norādītie informācijas avoti un iesniegtā darba elektroniskā kopija
-  atbilst izdrukai.
-  #set par(hanging-indent: 1cm)
-
-  #v(0.2fr)
-
-  #if authors.len() > 1 { "Autori: " } else { "Autors: " }
-  #(
-    authors.map(author => [*#author.name, #author.code*]).join(", ")
-  ) ~ #formatted-date
-
-  #v(1fr)
-  Rekomendēju darbu aizstāvēšanai\
-  #if advisors.len() > 0 [
-    #if advisors.len() > 1 { "Vadītāji:" } else { "Vadītājs:" }
-    #(
-      advisors.map(advisor => [*#advisor.title #advisor.name*]).join("\n")
-    ) ~ #formatted-date
-  ]
-
-  #v(1fr)
-
-  #if reviewer != none {
-    [Recenzents: *#reviewer.title #reviewer.name*]
-    v(1fr)
-  }
-
-
-  Darbs iesniegts Datorikas nodaļā #formatted-date \
-  Pilnvarotā persona: vecākā metodiķe: Ārija Sproģe #line(length: 10%, stroke: 0.5pt)
-
-  #v(1fr)
-
-  Darbs aizstāvēts bakalaura gala pārbaudījuma komisijas sēdē
-
-  #v(1fr)
-]
 
 #let make-attachments(title, attachments) = {
   if attachments == () {

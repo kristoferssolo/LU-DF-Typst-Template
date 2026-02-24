@@ -40,8 +40,9 @@
   bibliography: none,
   university: "Latvijas Universitāte",
   faculty: [Eksakto zinātņu un tehnoloģiju fakultāte\ Datorikas nodaļa],
-  thesis-type: "Bakalaura darbs",
+  thesis-type: "bachelor",
   date: datetime.today(),
+  presentation-date: datetime.today(),
   place: none,
   logo: none,
   outline-title: "Saturs",
@@ -309,6 +310,7 @@
       reviewer,
       thesis-type,
       date,
+      presentation-date,
     )
   }
 }
