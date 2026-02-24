@@ -18,6 +18,11 @@ and attachments. The example demonstrates:
 - Attachments (tables)
 - Simple DPD/ER diagrams via `fletcher` or external images and local helpers
 
+## Thesis type
+
+This example uses `thesis-type: "qualification"` which generates the appropriate
+documentary page for course works.
+
 ## License
 
 This project is licensed under the MIT-0 License - see the [LICENSE](./../../LICENSE) file for details.

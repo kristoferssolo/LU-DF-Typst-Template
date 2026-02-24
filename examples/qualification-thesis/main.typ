@@ -7,7 +7,7 @@
 #import table: cell, header
 
 #show: ludf.with(
-  title: "Darba Nosaukums",
+  title: "Kvalifikācijas Darba Nosaukums",
   thesis-type: "qualification",
   authors: (
     (
@@ -30,7 +30,8 @@
     ),
   ),
   reviewer: (
-    name: "Jānis Ozols",
+    title: "Prof. Dr. Phys.",
+    name: "Anna Liepa",
   ),
   date: datetime(
     year: 2025,

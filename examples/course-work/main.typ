@@ -1,7 +1,8 @@
 #import "@preview/solo-lu-df:1.1.0": *
 
 #show: ludf.with(
-  title: "Darba Nosaukums",
+  title: "Kursa Darba Nosaukums",
+  thesis-type: "course",
   authors: (
     (
       name: "Jānis Bērziņš",
@@ -9,24 +10,22 @@
       location: [Riga, Latvia],
       email: "jb12345@edu.lu.lv",
     ),
-    (
-      name: "Zane Kalniņa",
-      code: "zk67890",
-      location: [Riga, Latvia],
-      email: "zk67890@edu.lu.lv",
-    ),
   ),
   advisors: (
     (
-      title: "Prof. Dr. Phys.",
-      name: "Anna Liepa",
+      title: "Mg. dat.",
+      name: "Ivars Ozoliņš",
     ),
+  ),
+  reviewer: (
+    title: "Prof. Dr. Phys.",
+    name: "Anna Liepa",
   ),
   date: datetime(
     year: 2025,
     month: 1,
     day: 1,
-  ), // defaults to datetime.today()
+  ),
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),
   abstract: (
@@ -65,13 +64,18 @@
       label: <table-1>,
       table(
         columns: (1fr, 1fr),
+        [foo], [bar],
+      ),
+    ),
+    attachment(
+      caption: "Another table",
+      table(
+        columns: (1fr, 1fr),
         [Column 1], [Column 2],
       ),
     ),
   ),
-  description: [Some random document description that will be wisible in the metadata],
 )
-
 
 #set heading(numbering: none)
 = Apzīmējumu saraksts
@@ -79,24 +83,10 @@
 / Universe: Typst kopienas paketes un šabloni.#footnote[https://typst.app/universe/]
 
 = Ievads
-#lorem(100)@typst
+#lorem(80)
 
-#set heading(numbering: "1.1.")
+= Teorijas apraksts
+#lorem(60)
 
-= Nodaļas nosaukums
-== Apakšnodaļas nosaukums
-== Apakšnodaļas nosaukums
-== Apakšnodaļas nosaukums
-
-= Nodaļas nosaukums
-== Apakšnodaļas nosaukums
-== Apakšnodaļas nosaukums
-
-= Nodaļas nosaukums
-== Apakšnodaļas nosaukums
-== Apakšnodaļas nosaukums
-
-#set heading(numbering: none)
-= Rezultāti
 = Secinājumi
-
+#lorem(20)
