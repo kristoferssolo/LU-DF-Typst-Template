@@ -127,16 +127,15 @@
 
   #set par(spacing: 2em)
 
-  #thesis-type "*#title*" ir
-  izstrādāts Latvijas Universitātes Eksakto zinātņu un tehnoloģiju fakultātē,
-  Datorikas nodaļā.
+  #thesis-type "*#title*" izstrādāts Latvijas Universitātes Eksakto zinātņu un
+  tehnoloģiju fakultātē.
 
   Ar savu parakstu apliecinu, ka darbs izstrādāts patstāvīgi, izmantoti tikai
   tajā norādītie informācijas avoti un iesniegtā darba elektroniskā kopija
-  atbilst izdrukai un/vai recenzentam uzrādītajai darba versijai.
+  atbilst izdrukai.
   #set par(hanging-indent: 1cm)
 
-  #v(0.5fr)
+  #v(0.2fr)
 
   #if authors.len() > 1 { "Autori: " } else { "Autors: " }
   #(
@@ -146,7 +145,7 @@
   #v(1fr)
   Rekomendēju darbu aizstāvēšanai\
   #if advisors.len() > 0 [
-    Darba #if advisors.len() > 1 { "vadītāji:" } else { "vadītājs:" }
+    #if advisors.len() > 1 { "Vadītāji:" } else { "Vadītājs:" }
     #(
       advisors.map(advisor => [*#advisor.title #advisor.name*]).join("\n")
     ) ~ #formatted-date
@@ -154,12 +153,18 @@
 
   #v(1fr)
 
-  Recenzents: *#reviewer.name*
+  #if reviewer != none {
+    [Recenzents: *#reviewer.title #reviewer.name*]
+    v(1fr)
+  }
+
+
+  Darbs iesniegts Datorikas nodaļā #formatted-date \
+  Pilnvarotā persona: vecākā metodiķe: Ārija Sproģe #line(length: 10%, stroke: 0.5pt)
 
   #v(1fr)
 
-  Darbs iesniegts #formatted-date \
-  #thesis-type.replace("darbs", "darbu") pārbaudīja komisijas sekretārs (elektronisks paraksts)
+  Darbs aizstāvēts bakalaura gala pārbaudījuma komisijas sēdē
 
   #v(1fr)
 ]

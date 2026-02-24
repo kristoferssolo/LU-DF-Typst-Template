@@ -18,7 +18,7 @@
   // location, and email. Everything but but the `name` and `code` is optional.
   authors: (),
   advisors: (),
-  reviewer: (name: ""),
+  reviewer: (title: "", name: ""),
   // The paper's abstract. Can be omitted if you don't have one.
   abstract: (
     primary: (
@@ -93,12 +93,10 @@
   set math.equation(numbering: "(1)")
   show math.equation: set block(spacing: 0.65em)
 
-
   // Configure lists and terms.
   set list(marker: ([•], [--], [\*], [·]))
   set enum(numbering: "1aiA)")
   set terms(separator: [ -- ])
-
 
   // Headings
   set heading(numbering: "1.1.")
@@ -111,7 +109,6 @@
       text(12pt, it)
     }
   }
-
 
   // Style bibliography.
   set std.bibliography(title: "Izmantotā literatūra un avoti")
@@ -157,7 +154,6 @@
   show figure.where(kind: "attachment"): set figure(numbering: "1.")
   show figure.where(kind: "attachment"): set figure.caption(separator: ". ")
 
-
   // Adapt supplement in caption independently from supplement used for references.
   show figure: fig => {
     let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
@@ -172,7 +168,6 @@
     ]
     fig
   }
-
 
   // Custom show rule for references
   show ref: it => {
@@ -233,7 +228,6 @@
     it
   }
 
-
   // Code blocks
   show raw: set text(
     font: (
@@ -247,7 +241,6 @@
     ligatures: false,
     spacing: 100%,
   )
-
 
   make-title(
     title,
@@ -263,7 +256,6 @@
 
   // Start page numbering
   set page(numbering: "1", number-align: center)
-
 
   // Display abstract and keywords.
   if abstract != none {
