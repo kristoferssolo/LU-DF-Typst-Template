@@ -26,7 +26,7 @@ configure the whole document and `attachment` helper function. Important argumen
   `code` and may include `location` and `email`.
 - `advisors`: Array of advisor dictionaries with `title` and `name`.
 - `reviewer`: Reviewer dictionary with `name`.
-- `thesis-type`: e.g., `"Bakalaura darbs"`, `"Kvalifikācijas Darbs"`.
+- `thesis-type`: Type of thesis - `"bachelor"`, `"course"`, or `"qualification"`. The documentary page adapts its content based on this value.
 - `date`: `datetime(...)` value for the thesis date. Defaults to `today`.
 - `place`: Place string (e.g., `"Rīga"`).
 - `abstract`: A record with `primary` and `secondary` abstracts. Each has
@@ -48,7 +48,7 @@ function in a show rule. If you want to change an existing project to use this
 template, you can add a show rule like this at the top of your file:
 
 ```typst
-#import "@preview/solo-lu-df:1.0.0": *
+#import "@preview/solo-lu-df:1.1.0": *
 
 #show: ludf.with(
   title: "Darba Nosaukums",
@@ -58,7 +58,7 @@ template, you can add a show rule like this at the top of your file:
   advisors: (
     (title: "Mg. dat.", name: "Ivars Ozoliņš"),
   ),
-  reviewer: (name: "Prof. Anna Liepa"),
+  reviewer: (title: "", name: "Prof. Anna Liepa"),
   date: datetime(year: 2025, month: 1, day: 1),
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),

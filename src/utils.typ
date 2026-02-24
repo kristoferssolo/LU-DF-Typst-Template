@@ -1,13 +1,5 @@
-#import "documentary-page.typ": make-documentary-page
+#import "documentary-page.typ": get-thesis-label, make-documentary-page
 
-#let get-thesis-type-name(thesis-type) = {
-  let thesis-types = (
-    qualification: "Kvalifikācijas darbs",
-    course: "Kursa darbs",
-    bachelor: "Bakalaura darbs",
-  )
-  thesis-types.at(thesis-type, default: str(thesis-type))
-}
 
 #let merge(a, b) = {
   let result = a
@@ -99,7 +91,7 @@
 
   v(0.2fr)
 
-  align(center, upper(text(size: 14pt, get-thesis-type-name(thesis-type))))
+  align(center, upper(text(size: 14pt, get-thesis-label(thesis-type))))
 
   v(1fr)
 

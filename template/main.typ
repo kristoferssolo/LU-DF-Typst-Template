@@ -1,4 +1,4 @@
-#import "@preview/solo-lu-df:1.0.0": *
+#import "@preview/solo-lu-df:1.1.0": *
 
 #show: ludf.with(
   title: "Darba Nosaukums",
