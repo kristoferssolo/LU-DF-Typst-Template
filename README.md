@@ -26,7 +26,7 @@ configure the whole document and `attachment` helper function. Important argumen
   `code` and may include `location` and `email`.
 - `advisors`: Array of advisor dictionaries with `title` and `name`.
 - `reviewer`: Reviewer dictionary with `name`.
-- `thesis-type`: Type of thesis - `"bachelor"`, `"course"`, or `"qualification"`. The documentary page adapts its content based on this value.
+- `thesis-type`: Type of thesis - `"bachelor"`, `"master"`, `"course"`, or `"qualification"`. The documentary page adapts its content based on this value.
 - `date`: `datetime(...)` value for the thesis date. Defaults to `today`.
 - `place`: Place string (e.g., `"Rīga"`).
 - `abstract`: A record with `primary` and `secondary` abstracts. Each has
@@ -85,9 +85,10 @@ template, you can add a show rule like this at the top of your file:
 
 Ready-to-edit examples for different thesis types are included:
 
-- **Bachelor thesis**: [`examples/bachelor-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/bachelor-thesis)
-- **Course work**: [`examples/course-work/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/course-work)
 - **Qualification thesis**: [`examples/qualification-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/qualification-thesis)
+- **Course work**: [`examples/course-work/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/course-work)
+- **Bachelor thesis**: [`examples/bachelor-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/bachelor-thesis)
+- **Master thesis**: [`examples/master-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples/master-thesis)
 
 View the examples on GitHub: <https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/main/examples>
 

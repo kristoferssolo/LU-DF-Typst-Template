@@ -7,7 +7,9 @@ typst:
     - Haug
     - Martin
     - Typst Projekta Izstrādātāji
-  url: {value: "https://typst.app/", date: 2025-01-01}
+  url:
+    value: "https://typst.app/"
+    date: 2025-01-01
 lvs_68:
   type: Book
   title: Programmatūras prasību specifikācijas ceļvedis

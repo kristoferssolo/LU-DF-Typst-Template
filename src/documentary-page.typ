@@ -10,19 +10,79 @@
   bachelor: (
     label: "Bakalaura darbs",
     intro-suffix: "",
+    make-footer: (date, presentation-date) => [
+      Darbs iesniegts Datorikas nodaļā #date \
+      Pilnvarotā persona: vecākā metodiķe: Ārija Sproģe ~#signature-line()
+
+      #v(1fr)
+
+      Darbs aizstāvēts bakalaura gala pārbaudījuma komisijas sēdē ~#signature-line() \
+      #presentation-date prot. Nr. #signature-line(length: 4em) \
+      Komisijas sekretārs(-e): #signature-line(length: 15em)
+    ],
+  ),
+  master: (
+    label: "Maģistra darbs",
+    intro-suffix: "",
+    make-footer: (date, presentation-date) => [
+      Darbs iesniegts Datorikas nodaļā #date \
+      Pilnvarotā persona: vecākā metodiķe: Ārija Sproģe ~#signature-line()
+
+      #v(1fr)
+
+      Darbs aizstāvēts maģistra gala pārbaudījuma komisijas sēdē ~#signature-line() \
+      #presentation-date prot. Nr. #signature-line(length: 4em) \
+      Komisijas sekretārs(-e): #signature-line(length: 15em)
+    ],
   ),
   course: (
     label: "Kursa darbs",
-    intro-suffix: " un/vai recenzentam uzrādītajai darba versijai",
+    intro-suffix: "",
+    make-footer: (date, _) => [
+      Darbs iesniegts Datorikas nodaļā #date \
+      Kursa darbu pārbaudīja komisijas sekretārs (elektronisks paraksts)
+    ],
   ),
   qualification: (
     label: "Kvalifikācijas darbs",
     intro-suffix: " un/vai recenzentam uzrādītajai darba versijai",
+    make-footer: (date, _) => [
+      Darbs iesniegts Datorikas nodaļā #date \
+      Kvalifikācijas darbu pārbaudījumu komisijas sekretārs (elektronisks paraksts)
+    ],
   ),
 )
 
-#let get-thesis-label(thesis-type) = {
-  thesis-config.at(thesis-type, default: (label: str(thesis-type))).label
+#let get-thesis-label(thesis-type) = (
+  thesis-config
+    .at(thesis-type, default: (
+      label: str(thesis-type),
+    ))
+    .label
+)
+
+#let get-thesis-config(thesis-type) = {
+  thesis-config.at(thesis-type, default: (
+    label: str(thesis-type),
+    intro-suffix: "",
+    make-footer: (date, _) => [],
+  ))
+}
+
+#let make-author-lines(authors, date) = {
+  if authors.len() > 1 [Autori:\ ] else [Autors: ]
+  authors.map(it => [*#it.name, #it.code* ~#signature-line()~ #date]).join(", ")
+}
+
+#let make-advisor-lines(advisors, date) = {
+  if advisors.len() > 0 [
+    #if advisors.len() > 1 [Vadītāji:\ ] else [Vadītājs:]
+    #(
+      advisors
+        .map(it => [*#it.title #it.name* ~#signature-line()~ #date])
+        .join("\n")
+    )
+  ]
 }
 
 #let make-dokumentary(
@@ -34,75 +94,25 @@
   date,
   presentation-date,
 ) = {
-  let (intro-suffix, footer) = if thesis-type == "bachelor" {
-    (
-      "",
-      [
-        Darbs iesniegts Datorikas nodaļā #date \
-        Pilnvarotā persona: vecākā metodiķe: Ārija Sproģe ~#signature-line()
-
-        #v(1fr)
-
-        Darbs aizstāvēts bakalaura gala pārbaudījuma komisijas sēdē ~#signature-line() \
-        #presentation-date prot. Nr. #signature-line(length: 4em) \
-        Komisijas sekretārs(-e): #signature-line(length: 15em)
-      ],
-    )
-  } else if thesis-type == "course" {
-    (
-      " un/vai recenzentam uzrādītajai darba versijai",
-      [
-        Darbs iesniegts Datorikas nodaļā #date \
-        Kursa darbu pārbaudīja komisijas sekretārs (elektronisks paraksts)
-      ],
-    )
-  } else {
-    (
-      " un/vai recenzentam uzrādītajai darba versijai",
-      [
-        Darbs iesniegts Datorikas nodaļā #date \
-        Kvalifikācijas darbu pārbaudījumu komisijas sekretārs (elektronisks paraksts)
-      ],
-    )
-  }
-
-  let work-label = if thesis-type == "bachelor" {
-    "Bakalaura darbs"
-  } else if thesis-type == "course" {
-    "Kursa darbs"
-  } else {
-    "Kvalifikācijas darbs"
-  }
+  let cfg = get-thesis-config(thesis-type)
 
   [
-    #work-label "*#title*" #if thesis-type == "bachelor" [izstrādāts] else [ir izstrādāts]
+    #cfg.label "*#title*" izstrādāts
     Latvijas Universitātes Eksakto zinātņu un tehnoloģiju fakultātē.
 
     Ar savu parakstu apliecinu, ka darbs izstrādāts patstāvīgi, izmantoti tikai
     tajā norādītie informācijas avoti un iesniegtā darba elektroniskā kopija
-    atbilst izdrukai#intro-suffix.
+    atbilst izdrukai#cfg.intro-suffix.
     #set par(hanging-indent: 1cm)
 
     #v(0.2fr)
 
-    #if authors.len() > 1 [Autori:\ ] else [Autors: ]
-    #(
-      authors
-        .map(it => [*#it.name, #it.code*  ~#signature-line()~ #date])
-        .join(", ")
-    )
+    #make-author-lines(authors, date)
 
     #v(1fr)
 
     Rekomendēju/nerekomendēju darbu aizstāvēšanai _(nederīgo svītro vadītājs)_\
-    #if advisors.len() > 0 [
-      #if advisors.len() > 1 [Vadītāji:\ ] else [Vadītājs:]
-      #(
-        advisors
-          .map(it => [*#it.title #it.name* ~#signature-line()~ #date])
-          .join("\n")
-      )
-    ]
+    #make-advisor-lines(advisors, date)
 
     #v(1fr)
 
@@ -111,7 +121,7 @@
       #v(1fr)
     ]
 
-    #footer
+    #(cfg.make-footer)(date, presentation-date)
 
     #v(1fr)
   ]
