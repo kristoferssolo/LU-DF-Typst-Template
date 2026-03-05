@@ -63,6 +63,7 @@
   place,
   logo,
 ) = {
+  set par(justify: false)
   align(
     center,
     upper(
