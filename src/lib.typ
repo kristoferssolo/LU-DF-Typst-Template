@@ -293,18 +293,26 @@
 
   make-attachments(attachment-title, attachments)
 
+  let title-text = if type(title) == content and "children" in title.fields() {
+    title
+      .fields()
+      .children
+      .filter(it => it.func() != linebreak)
+      .fold((), (acc, it) => {
+        if it == [ ] and acc.last() == [ ] {
+          acc
+        } else {
+          acc + (it,)
+        }
+      })
+      .join("")
+  } else {
+    title
+  }
+
   if display-documentary {
     make-documentary-page(
-      if type(title) == content {
-        title
-          .fields()
-          .values()
-          .at(0)
-          .filter(it => it.func() != linebreak and it != [ ])
-          .join(" ")
-      } else {
-        title
-      },
+      title-text,
       authors,
       advisors,
       reviewer,
