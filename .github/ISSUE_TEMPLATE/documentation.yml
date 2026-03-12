@@ -1,0 +1,27 @@
+name: Documentation
+description: Missing, incorrect, or unclear documentation
+labels: ["documentation"]
+assignees: [kristoferssolo]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: File, section, or page where the issue is.
+      placeholder: "e.g. README.md > Usage, or docs/structure.md"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What's Wrong
+      description: What is missing, incorrect, or unclear?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Improvement
+      description: How should it read or what should be added?
+    validations:
+      required: false

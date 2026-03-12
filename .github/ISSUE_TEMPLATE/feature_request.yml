@@ -1,0 +1,39 @@
+name: Feature Request
+description: Suggest new functionality or an enhancement
+labels: ["feature"]
+assignees: [kristoferssolo]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before submitting, check [existing issues](../../issues) to avoid duplicates.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Motivation
+      description: What problem does this solve? Why is it needed?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the feature and how it should work.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any workarounds or other approaches you've considered.
+    validations:
+      required: false
+  - type: checkboxes
+    id: lu-scope
+    attributes:
+      label: Scope
+      options:
+        - label: >
+            This is required or implied by University of Latvia thesis guidelines
+
+        - label: This is a general usability or quality-of-life improvement

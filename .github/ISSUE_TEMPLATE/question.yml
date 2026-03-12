@@ -1,0 +1,33 @@
+name: Question
+description: Ask a question about using the template
+labels: ["question"]
+assignees: [kristoferssolo]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check the [README](../../blob/main/README.md) and
+        [existing issues](../../issues) first.
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: >
+        What are you trying to achieve? What have you already tried?
+
+    validations:
+      required: false
+  - type: input
+    id: typst-version
+    attributes:
+      label: Typst Version
+      description: If relevant, run `typst --version`
+      placeholder: "e.g. typst 0.14.0"
+    validations:
+      required: false
