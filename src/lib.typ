@@ -299,7 +299,7 @@
       .children
       .filter(it => it.func() != linebreak)
       .fold((), (acc, it) => {
-        if it == [ ] and acc.last() == [ ] {
+        if it == [ ] and acc.len() > 0 and acc.last() == [ ] {
           acc
         } else {
           acc + (it,)
