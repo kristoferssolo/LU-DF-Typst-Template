@@ -1,6 +1,5 @@
 #import "documentary-page.typ": get-thesis-label, make-documentary-page
 
-
 #let merge(a, b) = {
   let result = a
   for (k, v) in b { result.at(k) = v }

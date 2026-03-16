@@ -127,6 +127,32 @@
   ]
 }
 
+#let normalize-title(title) = {
+  if type(title) != content or "children" not in title.fields() {
+    return title
+  }
+
+  let children = title
+    .fields()
+    .children
+    .filter(it => it.func() != linebreak)
+    .fold((), (acc, it) => {
+      if it == [ ] and (acc.len() == 0 or acc.last() == [ ]) {
+        acc
+      } else {
+        acc + (it,)
+      }
+    })
+
+  let children = if children.len() > 0 and children.last() == [ ] {
+    children.slice(0, -1)
+  } else {
+    children
+  }
+
+  children.join("")
+}
+
 #let make-documentary-page(
   title,
   authors,
@@ -137,11 +163,11 @@
   presentation-date,
 ) = {
   set page(numbering: none)
-  heading(level: 1, outlined: false, numbering: none, "Dokumentārā lapa")
   set par(spacing: 2em)
+  heading(level: 1, outlined: false, numbering: none, "Dokumentārā lapa")
 
   make-dokumentary(
-    title,
+    normalize-title(title),
     authors,
     advisors,
     reviewer,
@@ -150,3 +176,4 @@
     fmt-date(presentation-date),
   )
 }
+
