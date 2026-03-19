@@ -3,9 +3,9 @@ Qualification thesis example (solo-lu-df)
 This folder contains a ready-to-edit qualification-thesis example built with
 the `solo-lu-df` Typst template:
 
-- `main.typ` — Typst source (the example document).
-- `bibliography.yml` — example bibliography entries.
-- `utils/` — helper snippets for diagrams/tables used by the example.
+- `main.typ` – Typst source (the example document).
+- `bibliography.yml` – example bibliography entries.
+- `utils/` – helper snippets for diagrams/tables used by the example.
 
 ## How to edit
 
@@ -25,4 +25,4 @@ documentary page for course works.
 
 ## License
 
-This project is licensed under the MIT-0 License - see the [LICENSE](./../../LICENSE) file for details.
+This project is licensed under the MIT-0 License – see the [LICENSE](./../../LICENSE) file for details.

@@ -3,8 +3,8 @@ Bachelor thesis example (solo-lu-df)
 This folder contains a ready-to-edit bachelor thesis example built with
 the `solo-lu-df` Typst template:
 
-- `main.typ` — Typst source (the example document).
-- `bibliography.yml` — example bibliography entries (create as needed).
+- `main.typ` – Typst source (the example document).
+- `bibliography.yml` – example bibliography entries (create as needed).
 
 ## How to edit
 
@@ -23,4 +23,4 @@ documentary page for bachelor theses.
 
 ## License
 
-This project is licensed under the MIT-0 License - see the [LICENSE](./../../LICENSE) file for details.
+This project is licensed under the MIT-0 License – see the [LICENSE](./../../LICENSE) file for details.
