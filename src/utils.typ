@@ -142,3 +142,15 @@
     ]
   }
 }
+
+#let appendix(caption: none, label: none, body) = {
+  let fig = figure(
+    caption: caption,
+    kind: "appendix",
+    supplement: "pielikums",
+    ..body,
+  )
+  if label == none {
+    fig
+  } else [#fig #label]
+}

@@ -85,8 +85,10 @@
 = Ievads
 #lorem(80)
 
+#set heading(numbering: "1.")
 = Teorijas apraksts
 #lorem(60)
+== Foo
 
 = Secinājumi
 #lorem(20)

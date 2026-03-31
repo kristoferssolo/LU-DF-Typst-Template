@@ -1,13 +1,15 @@
-#import "utils.typ": (
-  make-abstract, make-attachments, make-documentary-page, make-title,
-)
+#import "utils.typ": make-abstract, make-documentary-page, make-title
 
-#let attachment(caption: none, label: none, body) = {
-  (
-    content: body,
+#let appendix(caption: none, label: none, body) = {
+  let fig = figure(
     caption: caption,
-    label: label,
+    kind: "appendix",
+    supplement: "pielikums",
+    ..body,
   )
+  if label == none {
+    fig
+  } else [#fig #label]
 }
 
 // This function gets your whole document as its `body` and formats
@@ -46,8 +48,6 @@
   place: none,
   logo: none,
   outline-title: "Saturs",
-  attachments: (),
-  attachment-title: "Pielikumi",
   display-documentary: true,
   description: none,
   body,
@@ -100,7 +100,7 @@
   set terms(separator: [ -- ])
 
   // Headings
-  set heading(numbering: "1.1.")
+  set heading(numbering: "1.")
   show heading: set block(spacing: 0.65em * 2, sticky: true)
   show heading: it => {
     if it.level == 1 {
@@ -128,7 +128,7 @@
   set figure(
     numbering: it => {
       let count = counter(heading).get()
-      numbering("1.1.", count.first(), it)
+      numbering("1.", count.first(), it)
     },
   )
 
@@ -152,8 +152,8 @@
 
   show figure.where(kind: table): set figure(supplement: "tabula")
 
-  show figure.where(kind: "attachment"): set figure(numbering: "1.")
-  show figure.where(kind: "attachment"): set figure.caption(separator: ". ")
+  show figure.where(kind: "appendix"): set figure(numbering: "1.")
+  show figure.where(kind: "appendix"): set figure.caption(separator: ". ")
 
   // Adapt supplement in caption independently from supplement used for references.
   show figure: fig => {
@@ -164,7 +164,7 @@
     show figure.caption: it => block[
       #emph([#numbers~#fig.supplement#it.separator])*#it.body*
     ]
-    show figure.caption.where(kind: "attachment"): it => block[
+    show figure.caption.where(kind: "appendix"): it => block[
       #numbers~#fig.supplement#it.separator#it.body
     ]
     fig
@@ -215,10 +215,10 @@
       let fig_num = counter(figure.where(kind: el.kind))
         .at(el.location())
         .first()
-      let numbers = if el.kind == "attachment" {
+      let numbers = if el.kind == "appendix" {
         numbering("1.", fig_num)
       } else {
-        numbering("1.1.", chap, fig_num)
+        numbering("1.", chap, fig_num)
       }
 
       let supplement = get-supplement(el.supplement)
@@ -265,7 +265,7 @@
   }
 
   // Table of contents.
-  // Format attachment entries in outline
+  // Format appendix entries in outline
   show outline.entry: it => {
     let el = it.element
     if el.func() == figure {
@@ -282,7 +282,7 @@
     depth: 3,
     indent: 1cm,
     title: text(size: 14pt, outline-title),
-    target: selector(heading).or(figure.where(kind: "attachment")),
+    target: selector(heading).or(figure.where(kind: "appendix")),
   )
 
   // Display the paper's contents.
@@ -291,7 +291,7 @@
   // Display bibliography.
   bibliography
 
-  make-attachments(attachment-title, attachments)
+  // make-attachments(attachment-title, attachments)
 
   if display-documentary {
     make-documentary-page(
