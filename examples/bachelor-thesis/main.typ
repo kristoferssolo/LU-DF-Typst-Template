@@ -91,7 +91,7 @@
 = Secinājumi
 #lorem(30)
 
-#references-start()
+#bibliography-here()
 
 = Pielikumi
 #appendix(

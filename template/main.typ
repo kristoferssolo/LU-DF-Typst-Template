@@ -95,7 +95,7 @@
 = Rezultāti
 = Secinājumi
 
-#references-start()
+#bibliography-here()
 
 = Pielikumi
 #appendix(

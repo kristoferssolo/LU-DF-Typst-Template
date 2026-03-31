@@ -1,6 +1,6 @@
 #import "utils.typ": make-abstract, make-documentary-page, make-title
 
-#let references-start() = metadata("ludf-references-start")
+#let bibliography-here() = metadata("ludf-bibliography-here")
 
 #let appendix(caption: none, label: none, body) = {
   let fig = figure(
@@ -9,9 +9,7 @@
     kind: "appendix",
     supplement: "pielikums",
   )
-  if label == none {
-    fig
-  } else [#fig #label]
+  if label == none { fig } else [#fig #label]
 }
 
 // This function gets your whole document as its `body` and formats
@@ -294,9 +292,9 @@
   )
 
   context {
-    show metadata.where(value: "ludf-references-start"): it => {
+    show metadata.where(value: "ludf-bibliography-here"): it => {
       if bibliography == none {
-        panic("`references-start()` requires `bibliography` to be set")
+        panic("`bibliography-here()` requires `bibliography` to be set")
       }
       bibliography
     }

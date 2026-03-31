@@ -19,20 +19,20 @@ Typst will create a new directory with the files needed to get started.
 ## Configuration
 
 This template exports the `ludf` function which accepts named arguments to
-configure the whole document, `references-start()` marker and `appendix` helper
+configure the whole document, `bibliography-here()` marker and `appendix` helper
 function. Important arguments:
 
 - `title`: Document title (content).
 - `authors`: Array of author dictionaries. Each author must have `name` and
   `code` and may include `location` and `email`.
 - `advisors`: Array of advisor dictionaries with `title` and `name`.
-- `reviewer`: Reviewer dictionary with `name`.
+- `reviewer`: Reviewer dictionary with `name`. Used on the documentary page for thesis types that include a reviewer.
 - `thesis-type`: Type of thesis - `"bachelor"`, `"master"`, `"course"`, or `"qualification"`. The documentary page adapts its content based on this value.
 - `submission-date`: `datetime(...)` value for the thesis submission date. Defaults to `today`.
-- `defense-date`: `datetime(...)` value for the thesis defense or presentation date. Defaults to `today`.
+- `defense-date`: `datetime(...)` value for the thesis defense or presentation date. Used on the documentary page for thesis types that include it. Defaults to `today`.
 - `place`: Place string (e.g., `"Rīga"`).
-- `abstract`: A record with `primary` and `secondary` abstracts. These are role-based sections, not fixed languages. By default `primary` is Latvian and `secondary` is English, but both can be overridden. Each has `text` (content) and `keywords` (array) as well as `title`, `lang` and `keywords-title`.
-- `bibliography`: Result of `bibliography("path/to/file.yml")` or `none`. Place `#references-start()` in the body where the references section should appear.
+- `abstract`: A record with `primary` and `secondary` abstracts. These are role-based sections, not fixed languages: `primary` is the main abstract and `secondary` is the additional required abstract. By default `primary` is Latvian and `secondary` is English, but both can be overridden. Each has `text` (content) and `keywords` (array) as well as `title`, `lang` and `keywords-title`.
+- `bibliography`: Result of `bibliography("path/to/file.yml")` or `none`. Place `#bibliography-here()` in the body where the references section should appear.
 - `outline-title`: Title for the table of contents. Defaults to `"Saturs"`.
 - `show-documentary-page`: Whether to display the documentary page at the end. Defaults to `true`.
 - `description`: Document description for PDF metadata. Defaults to `none`.
@@ -70,7 +70,7 @@ template, you can add a show rule like this at the top of your file:
 
 // Your content goes here.
 
-#references-start()
+#bibliography-here()
 
 #heading(level: 1, "Pielikumi")
 #appendix(
@@ -84,7 +84,7 @@ template, you can add a show rule like this at the top of your file:
 ]
 ```
 
-If you use `bibliography`, place `#references-start()` exactly once.
+If you use `bibliography`, place `#bibliography-here()` exactly once.
 
 ## Examples
 

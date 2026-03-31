@@ -304,7 +304,7 @@ sk. @view-flow-diagram
 
 === Ekrānskati
 
-#references-start()
+#bibliography-here()
 
 #heading(numbering: none, "Pielikumi")
 #appendix(

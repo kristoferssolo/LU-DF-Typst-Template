@@ -11,12 +11,12 @@ the `solo-lu-df` Typst template:
 
 Open `examples/qualification-thesis/main.typ` and modify the `ludf.with(...)`
 call to change title, authors, advisors, submission date, defense date, place,
-abstract, and bibliography. Place `#references-start()` where the references
+abstract, and bibliography. Place `#bibliography-here()` where the references
 section should appear. The example demonstrates:
 
 - Title/author/advisor metadata
 - Primary and secondary abstracts with keywords
-- Explicit bibliography placement with `#references-start()`
+- Explicit bibliography placement with `#bibliography-here()`
 - Appendices (tables) written directly in the document body
 - Simple DPD/ER diagrams via `fletcher` or external images and local helpers
 
