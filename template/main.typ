@@ -22,11 +22,16 @@
       name: "Anna Liepa",
     ),
   ),
-  date: datetime(
+  submission-date: datetime(
     year: 2025,
     month: 1,
     day: 1,
   ), // defaults to datetime.today()
+  defense-date: datetime(
+    year: 2025,
+    month: 1,
+    day: 15,
+  ),
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),
   abstract: (

@@ -25,10 +25,15 @@
     title: "Prof. Dr. Phys.",
     name: "Anna Liepa",
   ),
-  date: datetime(
+  submission-date: datetime(
     year: 2025,
     month: 6,
     day: 15,
+  ),
+  defense-date: datetime(
+    year: 2025,
+    month: 6,
+    day: 30,
   ),
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),

@@ -9,9 +9,9 @@ the `solo-lu-df` Typst template:
 ## How to edit
 
 Open `examples/bachelor-thesis/main.typ` and modify the `ludf.with(...)`
-call to change title, authors, advisors, reviewer, date, place, abstract,
-and bibliography. Place `#references-start()` where the references section
-should appear. The example demonstrates:
+call to change title, authors, advisors, reviewer, submission date, defense
+date, place, abstract, and bibliography. Place `#references-start()` where the
+references section should appear. The example demonstrates:
 
 - Title/author/advisor metadata
 - Reviewer for bachelor thesis

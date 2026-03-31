@@ -22,19 +22,19 @@
   // location, and email. Everything but but the `name` and `code` is optional.
   authors: (),
   advisors: (),
-  reviewer: (title: "", name: ""),
+  reviewer: none,
   // The paper's abstract. Can be omitted if you don't have one.
   abstract: (
     primary: (
       title: "Anotācija",
-      keyword-title: "Atslēgvārdi",
+      keywords-title: "Atslēgvārdi",
       lang: "lv",
       text: [],
       keywords: (),
     ),
     secondary: (
       title: "Abstract",
-      keyword-title: "Keywords",
+      keywords-title: "Keywords",
       lang: "en",
       text: [],
       keywords: (),
@@ -45,12 +45,12 @@
   university: "Latvijas Universitāte",
   faculty: [Eksakto zinātņu un tehnoloģiju fakultāte\ Datorikas nodaļa],
   thesis-type: "bachelor",
-  date: datetime.today(),
-  presentation-date: datetime.today(),
+  submission-date: datetime.today(),
+  defense-date: datetime.today(),
   place: none,
   logo: none,
   outline-title: "Saturs",
-  display-documentary: true,
+  show-documentary-page: true,
   description: none,
   body,
 ) = {
@@ -258,7 +258,7 @@
     university,
     faculty,
     thesis-type,
-    date,
+    submission-date,
     place,
     logo,
   )
@@ -305,15 +305,15 @@
     body
   }
 
-  if display-documentary {
+  if show-documentary-page {
     make-documentary-page(
       title,
       authors,
       advisors,
       reviewer,
       thesis-type,
-      date,
-      presentation-date,
+      submission-date,
+      defense-date,
     )
   }
 }

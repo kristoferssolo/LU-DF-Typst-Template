@@ -12,7 +12,7 @@
     (
       lang: "lv",
       title: "Anotācija",
-      keyword-title: "Atslēgvārdi",
+      keywords-title: "Atslēgvārdi",
       text: [],
       keywords: [],
     )
@@ -20,7 +20,7 @@
     (
       lang: "en",
       title: "Abstract",
-      keyword-title: "Keywords",
+      keywords-title: "Keywords",
       text: [],
       keywords: [],
     )
@@ -42,7 +42,7 @@
     #abs.text
 
     // Keywords
-    #par(first-line-indent: 0cm)[ *#abs.keyword-title*: ]
+    #par(first-line-indent: 0cm)[ *#abs.keywords-title*: ]
     #abs.keywords.join(", ").
   ]
 }
@@ -58,7 +58,7 @@
   university,
   faculty,
   thesis-type,
-  date,
+  submission-date,
   place,
   logo,
 ) = {
@@ -112,5 +112,5 @@
 
   v(0.5fr)
 
-  align(center, upper([#place #date.year()]))
+  align(center, upper([#place #submission-date.year()]))
 }

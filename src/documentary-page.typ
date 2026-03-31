@@ -10,44 +10,44 @@
   bachelor: (
     label: "Bakalaura darbs",
     intro-suffix: "",
-    make-footer: (date, presentation-date) => [
-      Darbs iesniegts Datorikas nodaļā #date \
+    make-footer: (submission-date, defense-date) => [
+      Darbs iesniegts Datorikas nodaļā #submission-date \
       Pilnvarotā persona: vecākā metodiķe: Ārija Sproģe ~#signature-line()
 
       #v(1fr)
 
       Darbs aizstāvēts bakalaura gala pārbaudījuma komisijas sēdē ~#signature-line() \
-      #presentation-date prot. Nr. #signature-line(length: 4em) \
+      #defense-date prot. Nr. #signature-line(length: 4em) \
       Komisijas sekretārs(-e): #signature-line(length: 15em)
     ],
   ),
   master: (
     label: "Maģistra darbs",
     intro-suffix: "",
-    make-footer: (date, presentation-date) => [
-      Darbs iesniegts Datorikas nodaļā #date \
+    make-footer: (submission-date, defense-date) => [
+      Darbs iesniegts Datorikas nodaļā #submission-date \
       Pilnvarotā persona: vecākā metodiķe: Ārija Sproģe ~#signature-line()
 
       #v(1fr)
 
       Darbs aizstāvēts maģistra gala pārbaudījuma komisijas sēdē ~#signature-line() \
-      #presentation-date prot. Nr. #signature-line(length: 4em) \
+      #defense-date prot. Nr. #signature-line(length: 4em) \
       Komisijas sekretārs(-e): #signature-line(length: 15em)
     ],
   ),
   course: (
     label: "Kursa darbs",
     intro-suffix: "",
-    make-footer: (date, _) => [
-      Darbs iesniegts Datorikas nodaļā #date \
+    make-footer: (submission-date, _) => [
+      Darbs iesniegts Datorikas nodaļā #submission-date \
       Kursa darbu pārbaudīja komisijas sekretārs (elektronisks paraksts)
     ],
   ),
   qualification: (
     label: "Kvalifikācijas darbs",
     intro-suffix: " un/vai recenzentam uzrādītajai darba versijai",
-    make-footer: (date, _) => [
-      Darbs iesniegts Datorikas nodaļā #date \
+    make-footer: (submission-date, _) => [
+      Darbs iesniegts Datorikas nodaļā #submission-date \
       Kvalifikācijas darbu pārbaudījumu komisijas sekretārs (elektronisks paraksts)
     ],
   ),
@@ -65,21 +65,21 @@
   thesis-config.at(thesis-type, default: (
     label: str(thesis-type),
     intro-suffix: "",
-    make-footer: (date, _) => [],
+    make-footer: (submission-date, _) => [],
   ))
 }
 
-#let make-author-lines(authors, date) = {
+#let make-author-lines(authors, submission-date) = {
   if authors.len() > 1 [Autori:\ ] else [Autors: ]
-  authors.map(it => [*#it.name, #it.code* ~#signature-line()~ #date]).join("\n")
+  authors.map(it => [*#it.name, #it.code* ~#signature-line()~ #submission-date]).join("\n")
 }
 
-#let make-advisor-lines(advisors, date) = {
+#let make-advisor-lines(advisors, submission-date) = {
   if advisors.len() > 0 [
     #if advisors.len() > 1 [Vadītāji:\ ] else [Vadītājs:]
     #(
       advisors
-        .map(it => [*#it.title #it.name* ~#signature-line()~ #date])
+        .map(it => [*#it.title #it.name* ~#signature-line()~ #submission-date])
         .join("\n")
     )
   ]
@@ -91,8 +91,8 @@
   advisors,
   reviewer,
   thesis-type,
-  date,
-  presentation-date,
+  submission-date,
+  defense-date,
 ) = {
   let cfg = get-thesis-config(thesis-type)
 
@@ -107,12 +107,12 @@
 
     #v(0.2fr)
 
-    #make-author-lines(authors, date)
+    #make-author-lines(authors, submission-date)
 
     #v(1fr)
 
     Rekomendēju/nerekomendēju darbu aizstāvēšanai _(nederīgo svītro vadītājs)_\
-    #make-advisor-lines(advisors, date)
+    #make-advisor-lines(advisors, submission-date)
 
     #v(1fr)
 
@@ -121,7 +121,7 @@
       #v(1fr)
     ]
 
-    #(cfg.make-footer)(date, presentation-date)
+    #(cfg.make-footer)(submission-date, defense-date)
 
     #v(1fr)
   ]
@@ -159,8 +159,8 @@
   advisors,
   reviewer,
   thesis-type,
-  date,
-  presentation-date,
+  submission-date,
+  defense-date,
 ) = {
   set page(numbering: none)
   set par(spacing: 2em)
@@ -172,8 +172,7 @@
     advisors,
     reviewer,
     thesis-type,
-    fmt-date(date),
-    fmt-date(presentation-date),
+    fmt-date(submission-date),
+    fmt-date(defense-date),
   )
 }
-

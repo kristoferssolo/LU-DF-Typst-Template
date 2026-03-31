@@ -28,13 +28,13 @@ function. Important arguments:
 - `advisors`: Array of advisor dictionaries with `title` and `name`.
 - `reviewer`: Reviewer dictionary with `name`.
 - `thesis-type`: Type of thesis - `"bachelor"`, `"master"`, `"course"`, or `"qualification"`. The documentary page adapts its content based on this value.
-- `date`: `datetime(...)` value for the thesis date. Defaults to `today`.
+- `submission-date`: `datetime(...)` value for the thesis submission date. Defaults to `today`.
+- `defense-date`: `datetime(...)` value for the thesis defense or presentation date. Defaults to `today`.
 - `place`: Place string (e.g., `"Rīga"`).
-- `abstract`: A record with `primary` and `secondary` abstracts. Each has
-  `text` (content) and `keywords` (array) as well as `title`, `lang` and `keyword-title`.
+- `abstract`: A record with `primary` and `secondary` abstracts. These are role-based sections, not fixed languages. By default `primary` is Latvian and `secondary` is English, but both can be overridden. Each has `text` (content) and `keywords` (array) as well as `title`, `lang` and `keywords-title`.
 - `bibliography`: Result of `bibliography("path/to/file.yml")` or `none`. Place `#references-start()` in the body where the references section should appear.
 - `outline-title`: Title for the table of contents. Defaults to `"Saturs"`.
-- `display-documentary`: Whether to display the documentary page at the end. Defaults to `true`.
+- `show-documentary-page`: Whether to display the documentary page at the end. Defaults to `true`.
 - `description`: Document description for PDF metadata. Defaults to `none`.
 - Positional argument: the document body follows the `ludf.with(...)` call.
 
@@ -58,7 +58,8 @@ template, you can add a show rule like this at the top of your file:
     (title: "Mg. dat.", name: "Ivars Ozoliņš"),
   ),
   reviewer: (title: "", name: "Prof. Anna Liepa"),
-  date: datetime(year: 2025, month: 1, day: 1),
+  submission-date: datetime(year: 2025, month: 1, day: 1),
+  defense-date: datetime(year: 2025, month: 1, day: 15),
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),
   abstract: (
