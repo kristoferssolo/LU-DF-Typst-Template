@@ -145,10 +145,10 @@
 
 #let appendix(caption: none, label: none, body) = {
   let fig = figure(
+    body,
     caption: caption,
     kind: "appendix",
     supplement: "pielikums",
-    ..body,
   )
   if label == none {
     fig

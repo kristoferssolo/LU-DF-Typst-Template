@@ -1,5 +1,5 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
-#import "@preview/solo-lu-df:1.1.1": *
+#import "@preview/solo-lu-df:2.0.0": *
 #import "utils/diagrams.typ": data-store, dpd-database, dpd-edge, process
 #import "utils/tables.typ": function-table
 
@@ -70,23 +70,6 @@
       ),
     ),
   ),
-  attachments: (
-    attachment(
-      caption: "Attachment table",
-      label: <table-1>,
-      table(
-        columns: (1fr, 1fr),
-        [foo], [bar],
-      ),
-    ),
-    attachment(
-      caption: "Another table",
-      table(
-        columns: (1fr, 1fr),
-        [Column 1], [Column 2],
-      ),
-    ),
-  ),
 )
 
 
@@ -108,7 +91,7 @@ aprakstīšanai" standarta prasības @lvs_72.
 
 == Pārskats
 
-#set heading(numbering: "1.1.")
+#set heading(numbering: "1.")
 
 = Vispārējais apraksts
 == Esošā stāvokļa apraksts
@@ -117,7 +100,7 @@ aprakstīšanai" standarta prasības @lvs_72.
 == Darījumprasības
 == Sistēmas lietotāji
 
-Skatīt @dpd-0
+Skatīt @dpd-0.
 
 #figure(
   caption: [\0. līmeņa DPD],
@@ -315,3 +298,29 @@ sk. @view-flow-diagram
 ) <view-flow-diagram>
 
 === Ekrānskati
+
+#references-start()
+
+#heading(numbering: none, "Pielikumi")
+#appendix(
+  caption: "Appendix table",
+  label: <table-1>,
+)[
+  #table(
+    columns: (1fr, 2fr),
+    table.header([Foo], [Bar]),
+    lorem(10), lorem(20),
+  )
+]
+
+
+#figure(
+  kind: "appendix",
+  supplement: "pielikums",
+  caption: "Another table",
+  table(
+    columns: (1fr, 2fr),
+    table.header([Foo], [Bar]),
+    lorem(10), lorem(20),
+  ),
+)

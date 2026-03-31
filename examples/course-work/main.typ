@@ -58,23 +58,6 @@
       ),
     ),
   ),
-  attachments: (
-    attachment(
-      caption: "Attachment table",
-      label: <table-1>,
-      table(
-        columns: (1fr, 1fr),
-        [foo], [bar],
-      ),
-    ),
-    attachment(
-      caption: "Another table",
-      table(
-        columns: (1fr, 1fr),
-        [Column 1], [Column 2],
-      ),
-    ),
-  ),
 )
 
 #set heading(numbering: none)
@@ -87,8 +70,39 @@
 
 #set heading(numbering: "1.")
 = Teorijas apraksts
-#lorem(60)
-== Foo
+#lorem(60) (skat. @table-1[pielikumu])
+
+== Subheading 1
+#lorem(30)
+
+== Subheading 2
+#lorem(30)
 
 = Secinājumi
-#lorem(20)
+#lorem(100)
+
+#references-start()
+
+#heading(numbering: none, "Pielikumi")
+#appendix(
+  caption: "Appendix table",
+  label: <table-1>,
+)[
+  #table(
+    columns: (1fr, 2fr),
+    table.header([Foo], [Bar]),
+    lorem(10), lorem(20),
+  )
+]
+
+
+#figure(
+  kind: "appendix",
+  supplement: "pielikums",
+  caption: "Another table",
+  table(
+    columns: (1fr, 2fr),
+    table.header([Foo], [Bar]),
+    lorem(10), lorem(20),
+  ),
+)

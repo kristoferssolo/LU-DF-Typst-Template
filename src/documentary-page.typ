@@ -71,7 +71,7 @@
 
 #let make-author-lines(authors, date) = {
   if authors.len() > 1 [Autori:\ ] else [Autors: ]
-  authors.map(it => [*#it.name, #it.code* ~#signature-line()~ #date]).join(", ")
+  authors.map(it => [*#it.name, #it.code* ~#signature-line()~ #date]).join("\n")
 }
 
 #let make-advisor-lines(advisors, date) = {

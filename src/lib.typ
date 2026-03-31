@@ -1,11 +1,13 @@
 #import "utils.typ": make-abstract, make-documentary-page, make-title
 
+#let references-start() = metadata("ludf-references-start")
+
 #let appendix(caption: none, label: none, body) = {
   let fig = figure(
+    body,
     caption: caption,
     kind: "appendix",
     supplement: "pielikums",
-    ..body,
   )
   if label == none {
     fig
@@ -285,13 +287,10 @@
     target: selector(heading).or(figure.where(kind: "appendix")),
   )
 
+  show metadata.where(value: "ludf-references-start"): it => bibliography
+
   // Display the paper's contents.
   body
-
-  // Display bibliography.
-  bibliography
-
-  // make-attachments(attachment-title, attachments)
 
   if display-documentary {
     make-documentary-page(

@@ -3,7 +3,7 @@
 A Typst template to write qualification papers, bachelor’s theses, and master’s
 theses for Latvijas Universitāte (Faculty of Exact Sciences, Computer Science).
 The package provides university-compliant layout rules, helpers for
-title/abstract/attachments, and a ready-to-edit example.
+title/abstract/appendices, and a ready-to-edit example.
 
 ## Usage
 
@@ -19,7 +19,8 @@ Typst will create a new directory with the files needed to get started.
 ## Configuration
 
 This template exports the `ludf` function which accepts named arguments to
-configure the whole document and `attachment` helper function. Important arguments:
+configure the whole document, `references-start()` marker and `appendix` helper
+function. Important arguments:
 
 - `title`: Document title (content).
 - `authors`: Array of author dictionaries. Each author must have `name` and
@@ -31,10 +32,8 @@ configure the whole document and `attachment` helper function. Important argumen
 - `place`: Place string (e.g., `"Rīga"`).
 - `abstract`: A record with `primary` and `secondary` abstracts. Each has
   `text` (content) and `keywords` (array) as well as `title`, `lang` and `keyword-title`.
-- `bibliography`: Result of `bibliography("path/to/file.yml")` or `none`.
-- `attachments`: Tuple of `attachment(...)` items (tables, figures). All attachments must be referenced in the document body to appear in the outline.
+- `bibliography`: Result of `bibliography("path/to/file.yml")` or `none`. Place `#references-start()` in the body where the references section should appear.
 - `outline-title`: Title for the table of contents. Defaults to `"Saturs"`.
-- `attachment-title`: Title for the attachments section. Defaults to `"Pielikumi"`.
 - `display-documentary`: Whether to display the documentary page at the end. Defaults to `true`.
 - `description`: Document description for PDF metadata. Defaults to `none`.
 - Positional argument: the document body follows the `ludf.with(...)` call.
@@ -66,19 +65,22 @@ template, you can add a show rule like this at the top of your file:
     primary: (text: [ Anotācijas teksts... ], keywords: ("Foo", "Bar")),
     secondary: (text: [ Abstract text... ], keywords: ("Foo", "Bar")),
   ),
-  attachments: (
-    attachment(
-      caption: "Attachment table",
-      label: <table-1>,
-      table(
-        columns: (1fr, 1fr),
-        [Column 1], [Column 2],
-      ),
-    ),
-  ),
 )
 
-// Your content goes below.
+// Your content goes here.
+
+#references-start()
+
+#heading(level: 1, "Pielikumi")
+#appendix(
+  caption: "Attachment table",
+  label: <table-1>,
+)[
+  #table(
+    columns: (1fr, 1fr),
+    [Column 1], [Column 2],
+  )
+]
 ```
 
 ## Examples

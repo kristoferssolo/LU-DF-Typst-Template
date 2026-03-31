@@ -58,23 +58,6 @@
       ),
     ),
   ),
-  attachments: (
-    attachment(
-      caption: "Attachment table",
-      label: <table-1>,
-      table(
-        columns: (1fr, 1fr),
-        [foo], [bar],
-      ),
-    ),
-    attachment(
-      caption: "Another table",
-      table(
-        columns: (1fr, 1fr),
-        [Column 1], [Column 2],
-      ),
-    ),
-  ),
 )
 
 
@@ -98,3 +81,25 @@
 
 = Secinājumi
 #lorem(30)
+
+#references-start()
+
+= Pielikumi
+#appendix(
+  caption: "Attachment table",
+  label: <table-1>,
+)[
+  #table(
+    columns: (1fr, 1fr),
+    [foo], [bar],
+  )
+]
+
+#appendix(
+  caption: "Another table",
+)[
+  #table(
+    columns: (1fr, 1fr),
+    [Column 1], [Column 2],
+  )
+]
