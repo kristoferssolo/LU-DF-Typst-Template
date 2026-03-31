@@ -64,10 +64,12 @@
   ),
 )
 
+#set heading(numbering: none)
 
 = Ievads
 #lorem(120)
 
+#set heading(numbering: "1.")
 = Teorētiskais pamatojums
 #lorem(100)
 
@@ -89,6 +91,7 @@
 = Testēšana
 #lorem(80)
 
+#set heading(numbering: none)
 = Rezultāti un analīze
 #lorem(100)
 

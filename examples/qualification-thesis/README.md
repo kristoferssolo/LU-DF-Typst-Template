@@ -10,18 +10,20 @@ the `solo-lu-df` Typst template:
 ## How to edit
 
 Open `examples/qualification-thesis/main.typ` and modify the `ludf.with(...)`
-call to change title, authors, advisors, date, place, abstract, bibliography,
-and attachments. The example demonstrates:
+call to change title, authors, advisors, date, place, abstract, and
+bibliography. Place `#references-start()` where the references section should
+appear. The example demonstrates:
 
 - Title/author/advisor metadata
 - Primary and secondary abstracts with keywords
-- Attachments (tables)
+- Explicit bibliography placement with `#references-start()`
+- Appendices (tables) written directly in the document body
 - Simple DPD/ER diagrams via `fletcher` or external images and local helpers
 
 ## Thesis type
 
 This example uses `thesis-type: "qualification"` which generates the appropriate
-documentary page for course works.
+documentary page for qualification theses.
 
 ## License
 

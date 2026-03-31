@@ -83,6 +83,8 @@ template, you can add a show rule like this at the top of your file:
 ]
 ```
 
+If you use `bibliography`, place `#references-start()` exactly once.
+
 ## Examples
 
 Ready-to-edit examples for different thesis types are included:

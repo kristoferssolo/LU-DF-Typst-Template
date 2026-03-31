@@ -61,8 +61,11 @@
 )
 
 
+#set heading(numbering: none)
 = Ievads
 #lorem(100)
+
+#set heading(numbering: "1.")
 
 = Teorētiskais pamatojums
 #lorem(80)
@@ -76,6 +79,7 @@
 == Risinājuma apraksts
 #lorem(60)
 
+#set heading(numbering: none)
 = Rezultāti
 #lorem(50)
 

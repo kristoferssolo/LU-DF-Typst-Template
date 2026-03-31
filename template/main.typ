@@ -92,7 +92,7 @@
 
 #references-start()
 
-#heading(numbering: none, "Pielikumi")
+= Pielikumi
 #appendix(
   caption: "Appendix table",
   label: <table-1>,

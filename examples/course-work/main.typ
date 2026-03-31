@@ -78,12 +78,13 @@
 == Subheading 2
 #lorem(30)
 
+#set heading(numbering: none)
 = Secinājumi
 #lorem(100)
 
 #references-start()
 
-#heading(numbering: none, "Pielikumi")
+= Pielikumi
 #appendix(
   caption: "Appendix table",
   label: <table-1>,

@@ -54,15 +54,21 @@
   description: none,
   body,
 ) = {
+  let keywords = if abstract != none {
+    abstract
+      .values()
+      .map(it => it.keywords)
+      .flatten()
+      .filter(it => it != none and it != "")
+  } else {
+    ()
+  }
+
   // Set document metadata.
   set document(
     title: title,
     author: authors.map(author => author.name),
-    keywords: abstract
-      .values()
-      .map(it => it.keywords)
-      .flatten()
-      .filter(it => it != none and it != ""),
+    keywords: keywords,
     description: description,
   )
 
@@ -287,10 +293,17 @@
     target: selector(heading).or(figure.where(kind: "appendix")),
   )
 
-  show metadata.where(value: "ludf-references-start"): it => bibliography
+  context {
+    show metadata.where(value: "ludf-references-start"): it => {
+      if bibliography == none {
+        panic("`references-start()` requires `bibliography` to be set")
+      }
+      bibliography
+    }
 
-  // Display the paper's contents.
-  body
+    // Display the paper's contents.
+    body
+  }
 
   if display-documentary {
     make-documentary-page(

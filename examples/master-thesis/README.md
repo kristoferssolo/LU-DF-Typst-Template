@@ -10,12 +10,15 @@ the `solo-lu-df` Typst template:
 
 Open `examples/master-thesis/main.typ` and modify the `ludf.with(...)`
 call to change title, authors, advisors, reviewer, date, place, abstract,
-and bibliography. The example demonstrates:
+and bibliography. Place `#references-start()` where the references section
+should appear. The example demonstrates:
 
 - Title/author/advisor metadata
 - Multiple advisors for master thesis
 - Reviewer for master thesis
 - Primary and secondary abstracts with keywords
+- Explicit bibliography placement with `#references-start()`
+- Appendices written directly in the document body
 
 ## Thesis type
 
