@@ -6,77 +6,95 @@
 
 #let fmt-date(date) = strong(date.display("[day].[month].[year]."))
 
-#let thesis-config = (
+#let thesis-config(labels) = (
   bachelor: (
-    label: "Bakalaura darbs",
-    intro-suffix: "",
+    label: labels.thesis_label_bachelor,
+    intro-suffix: labels.documentary_intro_suffix_bachelor,
     make-footer: (submission-date, defense-date) => [
-      Darbs iesniegts Datorikas nodaļā #submission-date \
-      Pilnvarotā persona: vecākā metodiķe: Ārija Sproģe ~#signature-line()
+      #labels.documentary_submitted_line #submission-date \
+      #labels.documentary_authorized_person_label ~#signature-line()
 
       #v(1fr)
 
-      Darbs aizstāvēts bakalaura gala pārbaudījuma komisijas sēdē ~#signature-line() \
-      #defense-date prot. Nr. #signature-line(length: 4em) \
-      Komisijas sekretārs(-e): #signature-line(length: 15em)
+      #labels.documentary_defense_line_bachelor ~#signature-line() \
+      #defense-date #labels.documentary_protocol_label #signature-line(
+        length: 4em,
+      ) \
+      #labels.documentary_committee_secretary_label #signature-line(
+        length: 15em,
+      )
     ],
   ),
   master: (
-    label: "Maģistra darbs",
-    intro-suffix: "",
+    label: labels.thesis_label_master,
+    intro-suffix: labels.documentary_intro_suffix_master,
     make-footer: (submission-date, defense-date) => [
-      Darbs iesniegts Datorikas nodaļā #submission-date \
-      Pilnvarotā persona: vecākā metodiķe: Ārija Sproģe ~#signature-line()
+      #labels.documentary_submitted_line #submission-date \
+      #labels.documentary_authorized_person_label ~#signature-line()
 
       #v(1fr)
 
-      Darbs aizstāvēts maģistra gala pārbaudījuma komisijas sēdē ~#signature-line() \
-      #defense-date prot. Nr. #signature-line(length: 4em) \
-      Komisijas sekretārs(-e): #signature-line(length: 15em)
+      #labels.documentary_defense_line_master ~#signature-line() \
+      #defense-date #labels.documentary_protocol_label #signature-line(
+        length: 4em,
+      ) \
+      #labels.documentary_committee_secretary_label #signature-line(
+        length: 15em,
+      )
     ],
   ),
   course: (
-    label: "Kursa darbs",
-    intro-suffix: "",
+    label: labels.thesis_label_course,
+    intro-suffix: labels.documentary_intro_suffix_course,
     make-footer: (submission-date, _) => [
-      Darbs iesniegts Datorikas nodaļā #submission-date \
-      Kursa darbu pārbaudīja komisijas sekretārs (elektronisks paraksts)
+      #labels.documentary_submitted_line #submission-date \
+      #labels.documentary_course_footer
     ],
   ),
   qualification: (
-    label: "Kvalifikācijas darbs",
-    intro-suffix: " un/vai recenzentam uzrādītajai darba versijai",
+    label: labels.thesis_label_qualification,
+    intro-suffix: labels.documentary_intro_suffix_qualification,
     make-footer: (submission-date, _) => [
-      Darbs iesniegts Datorikas nodaļā #submission-date \
-      Kvalifikācijas darbu pārbaudījumu komisijas sekretārs (elektronisks paraksts)
+      #labels.documentary_submitted_line #submission-date \
+      #labels.documentary_qualification_footer
     ],
   ),
 )
 
-#let get-thesis-label(thesis-type) = (
-  thesis-config
+#let get-thesis-label(thesis-type, labels) = (
+  thesis-config(labels)
     .at(thesis-type, default: (
       label: str(thesis-type),
     ))
     .label
 )
 
-#let get-thesis-config(thesis-type) = {
-  thesis-config.at(thesis-type, default: (
+#let get-thesis-config(thesis-type, labels) = {
+  thesis-config(labels).at(thesis-type, default: (
     label: str(thesis-type),
     intro-suffix: "",
     make-footer: (submission-date, _) => [],
   ))
 }
 
-#let make-author-lines(authors, submission-date) = {
-  if authors.len() > 1 [Autori:\ ] else [Autors: ]
-  authors.map(it => [*#it.name, #it.code* ~#signature-line()~ #submission-date]).join("\n")
+#let make-author-lines(authors, submission-date, labels) = {
+  if authors.len() > 1 [
+    #labels.documentary_authors_plural:\
+  ] else [
+    #labels.documentary_authors_singular:
+  ]
+  authors
+    .map(it => [*#it.name, #it.code* ~#signature-line()~ #submission-date])
+    .join("\n")
 }
 
-#let make-advisor-lines(advisors, submission-date) = {
+#let make-advisor-lines(advisors, submission-date, labels) = {
   if advisors.len() > 0 [
-    #if advisors.len() > 1 [Vadītāji:\ ] else [Vadītājs:]
+    #if advisors.len() > 1 [
+      #labels.documentary_advisors_plural:\
+    ] else [
+      #labels.documentary_advisors_singular:
+    ]
     #(
       advisors
         .map(it => [*#it.title #it.name* ~#signature-line()~ #submission-date])
@@ -93,31 +111,30 @@
   thesis-type,
   submission-date,
   defense-date,
+  labels,
 ) = {
-  let cfg = get-thesis-config(thesis-type)
+  let cfg = get-thesis-config(thesis-type, labels)
 
   [
-    #cfg.label "*#title*" izstrādāts
-    Latvijas Universitātes Eksakto zinātņu un tehnoloģiju fakultātē.
+    #cfg.label "*#title*" #labels.documentary_developed_at
+    #labels.documentary_faculty_name.
 
-    Ar savu parakstu apliecinu, ka darbs izstrādāts patstāvīgi, izmantoti tikai
-    tajā norādītie informācijas avoti un iesniegtā darba elektroniskā kopija
-    atbilst izdrukai#cfg.intro-suffix.
+    #labels.documentary_declaration#cfg.intro-suffix.
     #set par(hanging-indent: 1cm)
 
     #v(0.2fr)
 
-    #make-author-lines(authors, submission-date)
+    #make-author-lines(authors, submission-date, labels)
 
     #v(1fr)
 
-    Rekomendēju/nerekomendēju darbu aizstāvēšanai _(nederīgo svītro vadītājs)_\
-    #make-advisor-lines(advisors, submission-date)
+    #labels.documentary_recommendation\
+    #make-advisor-lines(advisors, submission-date, labels)
 
     #v(1fr)
 
     #if reviewer != none [
-      Recenzents: *#reviewer.title  #reviewer.name*
+      #labels.documentary_reviewer_label: *#reviewer.title  #reviewer.name*
       #v(1fr)
     ]
 
@@ -161,10 +178,16 @@
   thesis-type,
   submission-date,
   defense-date,
+  labels,
 ) = {
   set page(numbering: none)
   set par(spacing: 2em)
-  heading(level: 1, outlined: false, numbering: none, "Dokumentārā lapa")
+  heading(
+    level: 1,
+    outlined: false,
+    numbering: none,
+    labels.documentary_page_title,
+  )
 
   make-dokumentary(
     normalize-title(title),
@@ -174,5 +197,6 @@
     thesis-type,
     fmt-date(submission-date),
     fmt-date(defense-date),
+    labels,
   )
 }

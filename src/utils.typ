@@ -1,30 +1,19 @@
-#import "documentary-page.typ": get-thesis-label, make-documentary-page
+#import "documentary-page.typ": make-documentary-page
 
 #let merge(a, b) = {
   let result = a
-  for (k, v) in b { result.at(k) = v }
+  for (k, v) in b { result.insert(k, v) }
   result
 }
 
-#let make-abstract(role, abstract) = {
-  // Define role-based defaults
-  let defaults = if role == "primary" {
+#let make-abstract(role, abstract, defaults) = {
+  let defaults = merge(
     (
-      lang: "lv",
-      title: "Anotācija",
-      keywords-title: "Atslēgvārdi",
       text: [],
       keywords: [],
-    )
-  } else {
-    (
-      lang: "en",
-      title: "Abstract",
-      keywords-title: "Keywords",
-      text: [],
-      keywords: [],
-    )
-  }
+    ),
+    defaults,
+  )
 
   // Merge defaults with overrides
   let abs = merge(defaults, abstract)
@@ -61,6 +50,7 @@
   submission-date,
   place,
   logo,
+  labels,
 ) = {
   set par(justify: false)
   align(
@@ -91,24 +81,40 @@
 
   v(0.2fr)
 
-  align(center, upper(text(size: 14pt, get-thesis-label(thesis-type))))
+  align(
+    center,
+    upper(text(size: 14pt, labels.at("thesis_label_" + thesis-type))),
+  )
 
   v(1fr)
 
   // Author information
-  context [
-    #set par(first-line-indent: 0pt)
-    #if authors.len() > 1 { "Autori:" } else { "Autors:" }
-    #authors.map(author => strong(author.name)).join(", ")
+  context {
+    set par(first-line-indent: 0pt)
+    if authors.len() > 1 {
+      labels.title_page_authors_plural
+    } else {
+      labels.title_page_authors_singular
+    }
+    authors.map(author => strong(author.name)).join(", ")
 
-    #if authors.len() > 1 { "Studentu" } else { "Studenta" }
-    apliecības Nr.: #authors.map(author => author.code).join(", ")
+    if authors.len() > 1 {
+      labels.title_page_student_number_prefix_plural
+    } else {
+      labels.title_page_student_number_prefix_singular
+    }
+    [#labels.title_page_student_number_label: #authors.map(author => author.code).join(",\n")]
 
-    #if advisors.len() > 0 [
-      Darba #if advisors.len() > 1 { "vadītāji:" } else { "vadītājs:" }
+    if advisors.len() > 0 [
+      #labels.title_page_advisor_prefix #if advisors.len() > 1 {
+        labels.title_page_advisors_plural
+      } else {
+        labels.title_page_advisors_singular
+      }
+
       #advisors.map(advisor => [#advisor.title #advisor.name]).join("\n")
     ]
-  ]
+  }
 
   v(0.5fr)
 

@@ -1,3 +1,4 @@
+#import "locale.typ": resolve-labels
 #import "utils.typ": make-abstract, make-documentary-page, make-title
 
 #let bibliography-here() = metadata("ludf-bibliography-here")
@@ -7,7 +8,7 @@
     body,
     caption: caption,
     kind: "appendix",
-    supplement: "pielikums",
+    supplement: "appendix",
   )
   if label == none { fig } else [#fig #label]
 }
@@ -40,11 +41,15 @@
   ),
   // The result of a call to the `bibliography` function or `none`.
   bibliography: none,
+  locale: "lv",
+  labels: (),
   university: "Latvijas Universitāte",
   faculty: [Eksakto zinātņu un tehnoloģiju fakultāte\ Datorikas nodaļa],
   thesis-type: "bachelor",
   submission-date: datetime.today(),
   defense-date: datetime.today(),
+  document-lang: "lv",
+  document-region: "lv",
   place: none,
   logo: none,
   outline-title: "Saturs",
@@ -52,6 +57,7 @@
   description: none,
   body,
 ) = {
+  let labels = resolve-labels(locale, labels)
   let keywords = if abstract != none {
     abstract
       .values()
@@ -78,8 +84,8 @@
     ),
     size: 12pt,
     hyphenate: auto,
-    lang: "lv",
-    region: "lv",
+    lang: document-lang,
+    region: document-region,
   )
 
   // Configure the page.
@@ -118,7 +124,7 @@
   }
 
   // Style bibliography.
-  set std.bibliography(title: "Izmantotā literatūra un avoti")
+  set std.bibliography(title: labels.bibliography_title)
 
   set quote(block: true)
 
@@ -147,7 +153,9 @@
   show figure: set image(width: 80%)
   show figure: set figure.caption(position: top, separator: " ")
 
-  show figure.where(kind: image): set figure(supplement: "att")
+  show figure.where(kind: image): set figure(
+    supplement: labels.figure_supplement,
+  )
   show figure.caption.where(kind: image): set align(start)
   show figure.caption: set block(sticky: true)
   show figure.caption: set text(size: 11pt)
@@ -156,9 +164,14 @@
     separator: ". ",
   )
 
-  show figure.where(kind: table): set figure(supplement: "tabula")
+  show figure.where(kind: table): set figure(
+    supplement: labels.table_supplement,
+  )
 
   show figure.where(kind: "appendix"): set figure(numbering: "1.")
+  show figure.where(kind: "appendix"): set figure(
+    supplement: labels.appendix_supplement,
+  )
   show figure.where(kind: "appendix"): set figure.caption(separator: ". ")
 
   // Adapt supplement in caption independently from supplement used for references.
@@ -259,6 +272,7 @@
     submission-date,
     place,
     logo,
+    labels,
   )
 
   // Start page numbering
@@ -266,8 +280,16 @@
 
   // Display abstract and keywords.
   if abstract != none {
-    make-abstract("primary", abstract.primary)
-    make-abstract("secondary", abstract.secondary)
+    make-abstract("primary", abstract.primary, (
+      lang: if locale == "en" { "en" } else { "lv" },
+      title: labels.abstract_primary_title,
+      keywords-title: labels.abstract_primary_keywords_title,
+    ))
+    make-abstract("secondary", abstract.secondary, (
+      lang: "en",
+      title: labels.abstract_secondary_title,
+      keywords-title: labels.abstract_secondary_keywords_title,
+    ))
   }
 
   // Table of contents.
@@ -312,6 +334,7 @@
       thesis-type,
       submission-date,
       defense-date,
+      labels,
     )
   }
 }
