@@ -136,6 +136,8 @@ Common paths include:
 Partial nested overrides are supported, so you only need to provide the leaf
 values you want to change.
 
+For the full set of available labels, see [`src/locale.typ`](https://github.com/kristoferssolo/LU-DF-Typst-Template/blob/v2.0.0/src/locale.typ).
+
 ## Examples
 
 Ready-to-edit examples for different thesis types are included:
@@ -150,6 +152,18 @@ Browse all examples on GitHub: <https://github.com/kristoferssolo/LU-DF-Typst-Te
 The qualification thesis example contains `main.typ`, `bibliography.yml` and small helpers under
 `utils/`. Use it as a starting point or copy it into a new project.
 
+## Optional Packages
+
+Depending on your thesis content, these Typst packages can pair well with this
+template:
+
+- [`zero`](https://typst.app/universe/package/zero) or [`unify`](https://typst.app/universe/package/unify) for advanced scientific number and unit formatting, depending on which better fits your use case.
+- [`fletcher`](https://typst.app/universe/package/fletcher) for diagrams.
+- [`equate`](https://typst.app/universe/package/equate) for equation helpers.
+- [`lilaq`](https://typst.app/universe/package/lilaq) for plots.
+- [`lovelace`](https://typst.app/universe/package/lovelace) for flexible pseudocode and algorithms.
+- [`codly`](https://typst.app/universe/package/codly) for better code listings.
+
 ## Tips
 
 - Install the fonts used by the template (Times family, JetBrains Mono) to
@@ -158,7 +172,7 @@ The qualification thesis example contains `main.typ`, `bibliography.yml` and sma
 - Bibliography: use Typst's `bibliography(...)` call with a YAML or Bib file.
 - Diagrams: the example imports the fletcher package and includes small
   helpers under `examples/.../utils/`, but you can also use exported
-    images from draw.io (diagrams.net) or any other diagram editor.
+    images from [draw.io (diagrams.net)](https://app.diagrams.net/) or any other diagram editor.
 
 ## License
 
