@@ -89,32 +89,31 @@
   v(1fr)
 
   // Author information
-  context {
-    set par(first-line-indent: 0pt)
-    if authors.len() > 1 {
+  context [
+    #set par(first-line-indent: 0pt)
+    #if authors.len() > 1 {
       labels.title_page_authors_plural
     } else {
       labels.title_page_authors_singular
     }
-    authors.map(author => strong(author.name)).join(", ")
+    #authors.map(author => strong(author.name)).join(", ")
 
-    if authors.len() > 1 {
+    #if authors.len() > 1 {
       labels.title_page_student_number_prefix_plural
     } else {
       labels.title_page_student_number_prefix_singular
     }
-    [#labels.title_page_student_number_label: #authors.map(author => author.code).join(",\n")]
+    #labels.title_page_student_number_label: #authors.map(author => author.code).join(",\n")
 
-    if advisors.len() > 0 [
+    #if advisors.len() > 0 [
       #labels.title_page_advisor_prefix #if advisors.len() > 1 {
-        labels.title_page_advisors_plural
+        [#labels.title_page_advisors_plural\ ]
       } else {
         labels.title_page_advisors_singular
       }
-
       #advisors.map(advisor => [#advisor.title #advisor.name]).join("\n")
     ]
-  }
+  ]
 
   v(0.5fr)
 
