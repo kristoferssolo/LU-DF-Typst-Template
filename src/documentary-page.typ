@@ -12,17 +12,16 @@
     intro-suffix: labels.documentary_intro_suffix_bachelor,
     make-footer: (submission-date, defense-date) => [
       #labels.documentary_submitted_line #submission-date \
-      #labels.documentary_authorized_person_label ~#signature-line()
+      #labels.documentary_authorized_person_label #labels.documentary_authorized_person_name ~#signature-line()
 
       #v(1fr)
 
-      #labels.documentary_defense_line_bachelor ~#signature-line() \
-      #defense-date #labels.documentary_protocol_label #signature-line(
-        length: 4em,
-      ) \
-      #labels.documentary_committee_secretary_label #signature-line(
-        length: 15em,
-      )
+      #labels.documentary_defense_line_bachelor
+      ~#signature-line() \
+      #defense-date #labels.documentary_protocol_label
+      ~#signature-line(length: 4em) \
+      #labels.documentary_committee_secretary_label
+      ~#signature-line(length: 15em)
     ],
   ),
   master: (
@@ -30,17 +29,15 @@
     intro-suffix: labels.documentary_intro_suffix_master,
     make-footer: (submission-date, defense-date) => [
       #labels.documentary_submitted_line #submission-date \
-      #labels.documentary_authorized_person_label ~#signature-line()
+      #labels.documentary_authorized_person_label #labels.documentary_authorized_person_name ~#signature-line()
 
       #v(1fr)
 
       #labels.documentary_defense_line_master ~#signature-line() \
-      #defense-date #labels.documentary_protocol_label #signature-line(
-        length: 4em,
-      ) \
-      #labels.documentary_committee_secretary_label #signature-line(
-        length: 15em,
-      )
+      #defense-date #labels.documentary_protocol_label
+      ~#signature-line(length: 4em) \
+      #labels.documentary_committee_secretary_label
+      ~#signature-line(length: 15em)
     ],
   ),
   course: (
