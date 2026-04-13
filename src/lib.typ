@@ -124,7 +124,7 @@
   }
 
   // Style bibliography.
-  set std.bibliography(title: labels.bibliography_title)
+  set std.bibliography(title: labels.bibliography.title)
 
   set quote(block: true)
 
@@ -154,7 +154,7 @@
   show figure: set figure.caption(position: top, separator: " ")
 
   show figure.where(kind: image): set figure(
-    supplement: labels.figure_supplement,
+    supplement: labels.supplement.figure,
   )
   show figure.caption.where(kind: image): set align(start)
   show figure.caption: set block(sticky: true)
@@ -165,12 +165,12 @@
   )
 
   show figure.where(kind: table): set figure(
-    supplement: labels.table_supplement,
+    supplement: labels.supplement.table,
   )
 
   show figure.where(kind: "appendix"): set figure(numbering: "1.")
   show figure.where(kind: "appendix"): set figure(
-    supplement: labels.appendix_supplement,
+    supplement: labels.supplement.appendix,
   )
   show figure.where(kind: "appendix"): set figure.caption(separator: ". ")
 
@@ -282,13 +282,13 @@
   if abstract != none {
     make-abstract("primary", abstract.primary, (
       lang: if locale == "en" { "en" } else { "lv" },
-      title: labels.abstract_primary_title,
-      keywords-title: labels.abstract_primary_keywords_title,
+      title: labels.abstract.primary.title,
+      keywords-title: labels.abstract.primary.keywords_title,
     ))
     make-abstract("secondary", abstract.secondary, (
       lang: "en",
-      title: labels.abstract_secondary_title,
-      keywords-title: labels.abstract_secondary_keywords_title,
+      title: labels.abstract.secondary.title,
+      keywords-title: labels.abstract.secondary.keywords_title,
     ))
   }
 

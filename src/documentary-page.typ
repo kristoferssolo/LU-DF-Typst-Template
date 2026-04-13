@@ -8,52 +8,54 @@
 
 #let thesis-config(labels) = (
   bachelor: (
-    label: labels.thesis_label_bachelor,
-    intro-suffix: labels.documentary_intro_suffix_bachelor,
+    label: labels.thesis.label.bachelor,
+    intro-suffix: labels.documentary.page.intro_suffix.bachelor,
     make-footer: (submission-date, defense-date) => [
-      #labels.documentary_submitted_line #submission-date \
-      #labels.documentary_authorized_person_label #labels.documentary_authorized_person_name ~#signature-line()
+      #labels.documentary.page.submitted_line #submission-date \
+      #let authorized_person = labels.documentary.page.authorized_person
+      #authorized_person.label #authorized_person.title #authorized_person.name ~#signature-line()
 
       #v(1fr)
 
-      #labels.documentary_defense_line_bachelor
+      #labels.documentary.page.defense_line.bachelor
       ~#signature-line() \
-      #defense-date #labels.documentary_protocol_label
+      #defense-date #labels.documentary.page.protocol_label
       ~#signature-line(length: 4em) \
-      #labels.documentary_committee_secretary_label
+      #labels.documentary.page.committee_secretary_label
       ~#signature-line(length: 15em)
     ],
   ),
   master: (
-    label: labels.thesis_label_master,
-    intro-suffix: labels.documentary_intro_suffix_master,
+    label: labels.thesis.label.master,
+    intro-suffix: labels.documentary.page.intro_suffix.master,
     make-footer: (submission-date, defense-date) => [
-      #labels.documentary_submitted_line #submission-date \
-      #labels.documentary_authorized_person_label #labels.documentary_authorized_person_name ~#signature-line()
+      #labels.documentary.page.submitted_line #submission-date \
+      #let authorized_person = labels.documentary.page.authorized_person
+      #authorized_person.label #authorized_person.title #authorized_person.name ~#signature-line()
 
       #v(1fr)
 
-      #labels.documentary_defense_line_master ~#signature-line() \
-      #defense-date #labels.documentary_protocol_label
+      #labels.documentary.page.defense_line.master ~#signature-line() \
+      #defense-date #labels.documentary.page.protocol_label
       ~#signature-line(length: 4em) \
-      #labels.documentary_committee_secretary_label
+      #labels.documentary.page.committee_secretary_label
       ~#signature-line(length: 15em)
     ],
   ),
   course: (
-    label: labels.thesis_label_course,
-    intro-suffix: labels.documentary_intro_suffix_course,
+    label: labels.thesis.label.course,
+    intro-suffix: labels.documentary.page.intro_suffix.course,
     make-footer: (submission-date, _) => [
-      #labels.documentary_submitted_line #submission-date \
-      #labels.documentary_course_footer
+      #labels.documentary.page.submitted_line #submission-date \
+      #labels.documentary.page.footer.course
     ],
   ),
   qualification: (
-    label: labels.thesis_label_qualification,
-    intro-suffix: labels.documentary_intro_suffix_qualification,
+    label: labels.thesis.label.qualification,
+    intro-suffix: labels.documentary.page.intro_suffix.qualification,
     make-footer: (submission-date, _) => [
-      #labels.documentary_submitted_line #submission-date \
-      #labels.documentary_qualification_footer
+      #labels.documentary.page.submitted_line #submission-date \
+      #labels.documentary.page.footer.qualification
     ],
   ),
 )
@@ -76,9 +78,9 @@
 
 #let make-author-lines(authors, submission-date, labels) = {
   if authors.len() > 1 [
-    #labels.documentary_authors_plural:\
+    #labels.documentary.page.authors.plural:\
   ] else [
-    #labels.documentary_authors_singular:
+    #labels.documentary.page.authors.singular:
   ]
   authors
     .map(it => [*#it.name, #it.code* ~#signature-line()~ #submission-date])
@@ -88,9 +90,9 @@
 #let make-advisor-lines(advisors, submission-date, labels) = {
   if advisors.len() > 0 [
     #if advisors.len() > 1 [
-      #labels.documentary_advisors_plural:\
+      #labels.documentary.page.advisors.plural:\
     ] else [
-      #labels.documentary_advisors_singular:
+      #labels.documentary.page.advisors.singular:
     ]
     #(
       advisors
@@ -113,10 +115,10 @@
   let cfg = get-thesis-config(thesis-type, labels)
 
   [
-    #cfg.label "*#title*" #labels.documentary_developed_at
-    #labels.documentary_faculty_name.
+    #cfg.label "*#title*" #labels.documentary.page.developed_at
+    #labels.documentary.page.faculty_name.
 
-    #labels.documentary_declaration#cfg.intro-suffix.
+    #labels.documentary.page.declaration#cfg.intro-suffix.
     #set par(hanging-indent: 1cm)
 
     #v(0.2fr)
@@ -125,13 +127,13 @@
 
     #v(1fr)
 
-    #labels.documentary_recommendation\
+    #labels.documentary.page.recommendation\
     #make-advisor-lines(advisors, submission-date, labels)
 
     #v(1fr)
 
     #if reviewer != none [
-      #labels.documentary_reviewer_label: *#reviewer.title  #reviewer.name*
+      #labels.documentary.page.reviewer_label: *#reviewer.title  #reviewer.name*
       #v(1fr)
     ]
 
@@ -183,7 +185,7 @@
     level: 1,
     outlined: false,
     numbering: none,
-    labels.documentary_page_title,
+    labels.documentary.page.title,
   )
 
   make-dokumentary(

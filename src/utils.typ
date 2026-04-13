@@ -2,7 +2,14 @@
 
 #let merge(a, b) = {
   let result = a
-  for (k, v) in b { result.insert(k, v) }
+  for (k, v) in b {
+    let current = result.at(k, default: none)
+    if type(current) == dictionary and type(v) == dictionary {
+      result.insert(k, merge(current, v))
+    } else {
+      result.insert(k, v)
+    }
+  }
   result
 }
 
@@ -83,7 +90,7 @@
 
   align(
     center,
-    upper(text(size: 14pt, labels.at("thesis_label_" + thesis-type))),
+    upper(text(size: 14pt, labels.thesis.label.at(thesis-type))),
   )
 
   v(1fr)
@@ -92,24 +99,24 @@
   context [
     #set par(first-line-indent: 0pt)
     #if authors.len() > 1 {
-      labels.title_page_authors_plural
+      labels.title.page.authors.plural
     } else {
-      labels.title_page_authors_singular
+      labels.title.page.authors.singular
     }
     #authors.map(author => strong(author.name)).join(", ")
 
     #if authors.len() > 1 {
-      labels.title_page_student_number_prefix_plural
+      labels.title.page.student_id.prefix.plural
     } else {
-      labels.title_page_student_number_prefix_singular
+      labels.title.page.student_id.prefix.singular
     }
-    #labels.title_page_student_number_label: #authors.map(author => author.code).join(",\n")
+    #labels.title.page.student_id.label: #authors.map(author => author.code).join(",\n")
 
     #if advisors.len() > 0 [
-      #labels.title_page_advisor_prefix #if advisors.len() > 1 {
-        [#labels.title_page_advisors_plural\ ]
+      #labels.title.page.advisors.prefix #if advisors.len() > 1 {
+        [#labels.title.page.advisors.plural\ ]
       } else {
-        labels.title_page_advisors_singular
+        labels.title.page.advisors.singular
       }
       #advisors.map(advisor => [#advisor.title #advisor.name]).join("\n")
     ]
