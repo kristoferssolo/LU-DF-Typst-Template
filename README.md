@@ -33,6 +33,8 @@ function. Important arguments:
 - `place`: Place string (e.g., `"Rīga"`).
 - `abstract`: A record with `primary` and `secondary` abstracts. These are role-based sections, not fixed languages: `primary` is the main abstract and `secondary` is the additional required abstract. By default `primary` is Latvian and `secondary` is English, but both can be overridden. Each has `text` (content) and `keywords` (array) as well as `title`, `lang` and `keywords-title`.
 - `bibliography`: Result of `bibliography("path/to/file.yml")` or `none`. Place `#bibliography-here()` in the body where the references section should appear.
+- `locale`: Built-in locale preset name. Currently `"lv"` and `"en"` are provided. Defaults to `"lv"`.
+- `labels`: Optional nested dictionary of label overrides merged into the selected locale preset.
 - `outline-title`: Title for the table of contents. Defaults to `"Saturs"`.
 - `show-documentary-page`: Whether to display the documentary page at the end. Defaults to `true`.
 - `description`: Document description for PDF metadata. Defaults to `none`.
@@ -76,15 +78,63 @@ template, you can add a show rule like this at the top of your file:
 #appendix(
   caption: "Attachment table",
   label: <table-1>,
-)[
-  #table(
+  table(
     columns: (1fr, 1fr),
     [Column 1], [Column 2],
-  )
-]
+  ),
+)
 ```
 
 If you use `bibliography`, place `#bibliography-here()` exactly once.
+
+## Locale Labels
+
+Localized strings are stored in nested dictionaries. Override them through the
+`labels` argument using the same structure as the built-in locale preset:
+
+```typst
+#show: ludf.with(
+  locale: "en",
+  labels: (
+    title: (
+      page: (
+        advisors: (
+          plural: "supervisors:",
+        ),
+      ),
+    ),
+    documentary: (
+      page: (
+        reviewer_label: "External Reviewer",
+      ),
+    ),
+  ),
+)
+```
+
+Common paths include:
+
+- `labels.title.page.authors.singular`
+- `labels.title.page.authors.plural`
+- `labels.title.page.student_number.prefix.singular`
+- `labels.title.page.student_number.prefix.plural`
+- `labels.title.page.student_number.label`
+- `labels.title.page.advisors.prefix`
+- `labels.title.page.advisors.singular`
+- `labels.title.page.advisors.plural`
+- `labels.documentary.page.title`
+- `labels.documentary.page.reviewer_label`
+- `labels.abstract.primary.title`
+- `labels.abstract.primary.keywords_title`
+- `labels.abstract.secondary.title`
+- `labels.abstract.secondary.keywords_title`
+- `labels.bibliography.title`
+- `labels.supplement.figure`
+- `labels.supplement.table`
+- `labels.supplement.appendix`
+
+Partial nested overrides are supported, so you only need to provide the leaf
+values you want to change.
 
 ## Examples
 
