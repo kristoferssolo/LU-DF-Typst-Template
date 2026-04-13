@@ -120,7 +120,6 @@
 
 #figure(
   kind: "appendix",
-  supplement: "pielikums",
   caption: "Another table",
   table(
     columns: (1fr, 2fr),

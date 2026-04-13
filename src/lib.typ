@@ -8,7 +8,6 @@
     body,
     caption: caption,
     kind: "appendix",
-    supplement: "appendix",
   )
   if label == none { fig } else [#fig #label]
 }
