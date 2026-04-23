@@ -1,9 +1,8 @@
 # solo-lu-df
 
-> [!WARNING]
-> `solo-lu-df` template has made breaking changes in 2.0 version. See the
-> [migration guide](#v20-migration-guide) and [change log](#v200) for more
-> information.
+**Warning:** `solo-lu-df` made breaking changes in `2.0`. See the
+[migration guide](#v20-migration-guide) and [changelog](#changelog) for more
+information.
 
 A Typst template to write qualification papers, bachelor’s theses, and master’s
 theses for Latvijas Universitāte (Faculty of Exact Sciences, Computer Science).
