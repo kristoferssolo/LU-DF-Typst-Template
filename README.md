@@ -74,7 +74,7 @@ template, you can add a show rule like this at the top of your file:
 
 #bibliography-here()
 
-#heading(level: 1, "Pielikumi")
+= Pielikumi
 #appendix(
   caption: "Attachment table",
   label: <table-1>,
@@ -83,6 +83,15 @@ template, you can add a show rule like this at the top of your file:
     [Column 1], [Column 2],
   ),
 )
+// or
+#figure(
+  caption: "Another table",
+  kind: "appendix",
+  table(
+    columns: (1fr, 1fr),
+    [Column 1], [Column 2],
+  ),
+) <table-2>
 ```
 
 If you use `bibliography`, place `#bibliography-here()` exactly once.

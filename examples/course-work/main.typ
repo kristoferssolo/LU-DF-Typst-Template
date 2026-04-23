@@ -91,23 +91,20 @@
 
 = Pielikumi
 #appendix(
-  caption: "Appendix table",
+  caption: "Attachment table",
   label: <table-1>,
-)[
-  #table(
-    columns: (1fr, 2fr),
-    table.header([Foo], [Bar]),
-    lorem(10), lorem(20),
-  )
-]
-
-
-#figure(
-  kind: "appendix",
-  caption: "Another table",
   table(
-    columns: (1fr, 2fr),
-    table.header([Foo], [Bar]),
-    lorem(10), lorem(20),
+    columns: (1fr, 1fr),
+    [foo], [bar],
   ),
 )
+
+#figure(
+  caption: "Another table",
+  kind: "appendix",
+  table(
+    columns: (1fr, 1fr),
+    [Column 1], [Column 2],
+  ),
+) <table-2>
+= Pielikumi
