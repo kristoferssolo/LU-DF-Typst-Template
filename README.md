@@ -149,20 +149,9 @@ Ready-to-edit examples for different thesis types are included:
 
 Browse all examples on GitHub: <https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples>
 
-The qualification thesis example contains `main.typ`, `bibliography.yml` and small helpers under
-`utils/`. Use it as a starting point or copy it into a new project.
-
-## Optional Packages
-
-Depending on your thesis content, these Typst packages can pair well with this
-template:
-
-- [`zero`](https://typst.app/universe/package/zero) or [`unify`](https://typst.app/universe/package/unify) for advanced scientific number and unit formatting, depending on which better fits your use case.
-- [`fletcher`](https://typst.app/universe/package/fletcher) for diagrams.
-- [`equate`](https://typst.app/universe/package/equate) for equation helpers.
-- [`lilaq`](https://typst.app/universe/package/lilaq) for plots.
-- [`lovelace`](https://typst.app/universe/package/lovelace) for flexible pseudocode and algorithms.
-- [`codly`](https://typst.app/universe/package/codly) for better code listings.
+The qualification thesis example contains `main.typ`, `bibliography.yml` and
+small helpers under `utils/`. Use it as a starting point or copy it into a new
+project.
 
 ## Tips
 
@@ -173,6 +162,83 @@ template:
 - Diagrams: the example imports the fletcher package and includes small
   helpers under `examples/.../utils/`, but you can also use exported
     images from [draw.io (diagrams.net)](https://app.diagrams.net/) or any other diagram editor.
+
+### Recommend packages
+
+Depending on your thesis content, these Typst packages can pair well with this template:
+
+- [`zero`](https://typst.app/universe/package/zero) or [`unify`](https://typst.app/universe/package/unify) for advanced scientific number and unit formatting, depending on which better fits your use case.
+- [`fletcher`](https://typst.app/universe/package/fletcher) for diagrams.
+- [`equate`](https://typst.app/universe/package/equate) for equation helpers.
+- [`lilaq`](https://typst.app/universe/package/lilaq) for plots.
+- [`lovelace`](https://typst.app/universe/package/lovelace) for flexible pseudocode and algorithms.
+- [`codly`](https://typst.app/universe/package/codly) for better code listings.
+
+## Changelog
+
+### v2.0.0
+
+- Breaking: rename `attachment(...)` to `appendix(...)`.
+- Breaking: remove the `attachments` and `attachment-title` arguments. Appendices now live directly in the document body.
+- Breaking: replace `date` with `submission-date` and `defense-date`.
+- Breaking: rename `display-documentary` to `show-documentary-page`.
+- Breaking: place references explicitly with `#bibliography-here()`.
+- Changed: clarify abstract roles and rename `keyword-title` to `keywords-title`.
+- Added: locale presets via `locale` and nested label overrides via `labels`.
+- Fixed: title-page author alignment, documentary authorized-person wording, appendix supplement localization, and appendix caption formatting.
+- Docs: add nested locale override examples and optional Typst package suggestions.
+
+### v1.1.2
+
+- Fixed documentary page thesis-title normalization before rendering.
+- Docs: pin example links to the tagged release.
+- Chore: add GitHub issue templates.
+
+### v1.1.1
+
+- Added short `thesis-type` keys such as `"bachelor"`, `"course"`, and `"qualification"`.
+- Added master thesis support plus bachelor-thesis and course-work examples.
+- Improved the bachelor thesis documentary page.
+- Fixed reviewer handling, title-page justification, and duplicate spacing in title content.
+- Docs: refresh README examples and thumbnail.
+
+### v1.0.0
+
+- Added an embedded fallback font.
+- Added the `description` field to the template and documented the reviewer example.
+- Docs: document `outline-title` and `attachment-title`.
+- Chore: clean up template internals and bump the version.
+
+### v0.1.5
+
+- Added attachments to the outline.
+- Docs: document new fields, the `description` field, and PDF keyword metadata behavior.
+
+### v0.1.4
+
+- Refactored the documentary page.
+- Fixed paragraph spacing.
+
+### v0.1.3
+
+- Added the `display-documentary` parameter.
+- Docs: fix the package version in the README.
+
+### v0.1.2
+
+- Added sticky captions and heading behavior.
+- Fixed documentary-page line breaks and typos.
+
+### v0.1.1
+
+- Fixed the submission date typo in `utils.typ`.
+- Updated font sizes.
+
+### v0.1.0
+
+- Added the base template, qualification thesis example, documentary page, and attachment support.
+- Improved figure and table captions, reference numbering, and reference supplements.
+- Docs: add README files and advisor example fixes.
 
 ## License
 
