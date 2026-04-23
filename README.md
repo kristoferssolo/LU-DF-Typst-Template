@@ -1,5 +1,10 @@
 # solo-lu-df
 
+> [!WARNING]
+> `solo-lu-df` template has made breaking changes in 2.0 version. See the
+> [migration guide](#v20-migration-guide) and [change log](#v200) for more
+> information.
+
 A Typst template to write qualification papers, bachelor’s theses, and master’s
 theses for Latvijas Universitāte (Faculty of Exact Sciences, Computer Science).
 The package provides university-compliant layout rules, helpers for
@@ -96,6 +101,87 @@ template, you can add a show rule like this at the top of your file:
 
 If you use `bibliography`, place `#bibliography-here()` exactly once.
 
+## v2.0 Migration Guide
+
+Apply these changes to your existing document:
+
+1. Rename `attachment(...)` to `appendix(...)`.
+2. Remove the `attachments` and `attachment-title` arguments from `ludf.with(...)`.
+3. Move appendices into the document body instead of adding them through `attachments`.
+4. Replace `date` with `submission-date` and `defense-date`.
+5. Rename `display-documentary` to `show-documentary-page`.
+6. Place `#bibliography-here()` exactly once where you want the references section to appear.
+7. If you override abstract labels, rename `keyword-title` to `keywords-title`.
+8. If you override labels, convert flat overrides to the new nested `labels` structure.
+
+```diff
+ #show: ludf.with(
+-  date: datetime(year: 2025, month: 1, day: 1),
+-  display-documentary: true,
++  submission-date: datetime(year: 2025, month: 1, day: 1),
++  defense-date: datetime(year: 2025, month: 1, day: 15),
++  show-documentary-page: true,
+-  attachments: (
+-    attachment(caption: "Attachment table", table()),
+-  ),
+ )
+```
+
+Appendix and bibliography placement in `v2.0.0`:
+
+```typst
+#bibliography-here()
+
+= Pielikumi
+#appendix(
+  caption: "Attachment table",
+  label: <label>,
+  table(),
+)
+// same as
+#figure(
+  caption: "Attachment table",
+  kind: "appendix",
+  table(),
+) <label>
+```
+
+## Examples
+
+Ready-to-edit examples for different thesis types are included:
+
+- **Qualification thesis**: [`examples/qualification-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/qualification-thesis)
+- **Course work**: [`examples/course-work/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/course-work)
+- **Bachelor thesis**: [`examples/bachelor-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/bachelor-thesis)
+- **Master thesis**: [`examples/master-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/master-thesis)
+
+Browse all examples on GitHub: <https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples>
+
+The qualification thesis example contains `main.typ`, `bibliography.yml` and
+small helpers under `utils/`. Use it as a starting point or copy it into a new
+project.
+
+## Tips
+
+- Install the fonts used by the template (Times family, JetBrains Mono) to
+  reproduce exact layout, or change font names in `src/lib.typ`. You can
+  override font by setting [text font](https://typst.app/docs/reference/text/text#parameters-font) to your desired one.
+- Bibliography: use Typst's `bibliography(...)` call with a YAML or Bib file.
+- Diagrams: the example imports the fletcher package and includes small
+  helpers under `examples/.../utils/`, but you can also use exported
+    images from [draw.io (diagrams.net)](https://app.diagrams.net/) or any other diagram editor.
+
+### Recommend packages
+
+Depending on your thesis content, these Typst packages can pair well with this template:
+
+- [`zero`](https://typst.app/universe/package/zero) or [`unify`](https://typst.app/universe/package/unify) for advanced scientific number and unit formatting, depending on which better fits your use case.
+- [`fletcher`](https://typst.app/universe/package/fletcher) for diagrams.
+- [`equate`](https://typst.app/universe/package/equate) for equation helpers.
+- [`lilaq`](https://typst.app/universe/package/lilaq) for plots.
+- [`lovelace`](https://typst.app/universe/package/lovelace) for flexible pseudocode and algorithms.
+- [`codly`](https://typst.app/universe/package/codly) for better code listings.
+
 ## Locale Labels
 
 Localized strings are stored in nested dictionaries. Override them through the
@@ -147,51 +233,15 @@ values you want to change.
 
 For the full set of available labels, see [`src/locale.typ`](https://github.com/kristoferssolo/LU-DF-Typst-Template/blob/v2.0.0/src/locale.typ).
 
-## Examples
-
-Ready-to-edit examples for different thesis types are included:
-
-- **Qualification thesis**: [`examples/qualification-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/qualification-thesis)
-- **Course work**: [`examples/course-work/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/course-work)
-- **Bachelor thesis**: [`examples/bachelor-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/bachelor-thesis)
-- **Master thesis**: [`examples/master-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/master-thesis)
-
-Browse all examples on GitHub: <https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples>
-
-The qualification thesis example contains `main.typ`, `bibliography.yml` and
-small helpers under `utils/`. Use it as a starting point or copy it into a new
-project.
-
-## Tips
-
-- Install the fonts used by the template (Times family, JetBrains Mono) to
-  reproduce exact layout, or change font names in `src/lib.typ`. You can
-  override font by setting [text font](https://typst.app/docs/reference/text/text#parameters-font) to your desired one.
-- Bibliography: use Typst's `bibliography(...)` call with a YAML or Bib file.
-- Diagrams: the example imports the fletcher package and includes small
-  helpers under `examples/.../utils/`, but you can also use exported
-    images from [draw.io (diagrams.net)](https://app.diagrams.net/) or any other diagram editor.
-
-### Recommend packages
-
-Depending on your thesis content, these Typst packages can pair well with this template:
-
-- [`zero`](https://typst.app/universe/package/zero) or [`unify`](https://typst.app/universe/package/unify) for advanced scientific number and unit formatting, depending on which better fits your use case.
-- [`fletcher`](https://typst.app/universe/package/fletcher) for diagrams.
-- [`equate`](https://typst.app/universe/package/equate) for equation helpers.
-- [`lilaq`](https://typst.app/universe/package/lilaq) for plots.
-- [`lovelace`](https://typst.app/universe/package/lovelace) for flexible pseudocode and algorithms.
-- [`codly`](https://typst.app/universe/package/codly) for better code listings.
-
 ## Changelog
 
 ### v2.0.0
 
-- Breaking: rename `attachment(...)` to `appendix(...)`.
-- Breaking: remove the `attachments` and `attachment-title` arguments. Appendices now live directly in the document body.
-- Breaking: replace `date` with `submission-date` and `defense-date`.
-- Breaking: rename `display-documentary` to `show-documentary-page`.
-- Breaking: place references explicitly with `#bibliography-here()`.
+- **Breaking**: rename `attachment(...)` to `appendix(...)`.
+- **Breaking**: remove the `attachments` and `attachment-title` arguments. Appendices now live directly in the document body.
+- **Breaking**: replace `date` with `submission-date` and `defense-date`.
+- **Breaking**: rename `display-documentary` to `show-documentary-page`.
+- **Breaking**: place references explicitly with `#bibliography-here()`.
 - Changed: clarify abstract roles and rename `keyword-title` to `keywords-title`.
 - Added: locale presets via `locale` and nested label overrides via `labels`.
 - Fixed: title-page author alignment, documentary authorized-person wording, appendix supplement localization, and appendix caption formatting.
@@ -251,4 +301,4 @@ Depending on your thesis content, these Typst packages can pair well with this t
 
 ## License
 
-This project is licensed under the MIT-0 License - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT-0 License – see the [LICENSE](./LICENSE) file for details.
