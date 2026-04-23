@@ -171,7 +171,7 @@
   show figure.where(kind: "appendix"): set figure(
     supplement: labels.supplement.appendix,
   )
-  show figure.where(kind: "appendix"): set figure.caption(separator: ". ")
+  show figure.where(kind: "appendix"): set figure.caption(separator: "\n")
 
   // Adapt supplement in caption independently from supplement used for references.
   show figure: fig => {
