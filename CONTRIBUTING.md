@@ -8,7 +8,7 @@ Getting started
 
 1. Fork the repository and create a branch for your change:
    - `git checkout -b feat/short-description` or `git checkout -b fix/short-description`
-2. Make changes locally and run the example build to check layout:
+1. Make changes locally and run the example build to check layout:
    - `typst compile examples/qualification-thesis/main.typ`
    - or run `typst watch` while editing.
 

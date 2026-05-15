@@ -169,6 +169,59 @@
   children.join("")
 }
 
+#let validate-documentary-page-layout(documentary-page-layout, thesis-type) = {
+  if documentary-page-layout not in ("legacy", "declaration") {
+    panic(
+      "unsupported documentary-page-layout: "
+        + str(documentary-page-layout)
+        + ". Expected `legacy` or `declaration`.",
+    )
+  }
+}
+
+#let get-declaration-thesis-label(cfg, thesis-type) = {
+  if thesis-type in cfg.thesis_label {
+    return cfg.thesis_label.at(thesis-type)
+  }
+
+  panic(
+    "documentary-page-layout: `declaration` does not support thesis-type: "
+      + str(thesis-type)
+      + ".",
+  )
+}
+
+#let validate-declaration-thesis-type(thesis-type, labels) = {
+  let cfg = labels.documentary.page.declaration_layout
+
+  if thesis-type not in cfg.thesis_label {
+    panic(
+      "documentary-page-layout: `declaration` does not support thesis-type: "
+        + str(thesis-type)
+        + ".",
+    )
+  }
+}
+
+#let make-declaration-page(title, authors, thesis-type, labels) = {
+  let cfg = labels.documentary.page.declaration_layout
+  let thesis-label = get-declaration-thesis-label(cfg, thesis-type)
+  let author-names = authors.map(author => author.name).join("\n")
+
+  set page(numbering: none)
+  set par(first-line-indent: 0pt, justify: true)
+
+  [
+    *#cfg.title* \ \
+
+    #cfg.statement_prefix #thesis-label "#title" #cfg.statement_suffix
+
+    #cfg.submission_statement
+
+    #align(right)[#author-names]
+  ]
+}
+
 #let make-documentary-page(
   title,
   authors,
@@ -178,7 +231,21 @@
   submission-date,
   defense-date,
   labels,
+  documentary-page-layout,
 ) = {
+  validate-documentary-page-layout(documentary-page-layout, thesis-type)
+
+  if documentary-page-layout == "declaration" {
+    validate-declaration-thesis-type(thesis-type, labels)
+
+    return make-declaration-page(
+      normalize-title(title),
+      authors,
+      thesis-type,
+      labels,
+    )
+  }
+
   set page(numbering: none)
   set par(spacing: 2em)
   heading(

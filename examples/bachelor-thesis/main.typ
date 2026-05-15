@@ -31,6 +31,7 @@
     month: 1,
     day: 15,
   ),
+  // documentary-page-layout: "declaration",
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),
   abstract: (

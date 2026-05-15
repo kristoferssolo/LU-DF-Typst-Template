@@ -51,10 +51,11 @@
   defense-date: datetime.today(),
   document-lang: "lv",
   document-region: "lv",
-  place: none,
+  place: "Rīga",
   logo: none,
   outline-title: "Saturs",
   show-documentary-page: true,
+  documentary-page-layout: "declaration",
   description: none,
   body,
 ) = {
@@ -341,6 +342,7 @@
       submission-date,
       defense-date,
       labels,
+      documentary-page-layout,
     )
   }
 }

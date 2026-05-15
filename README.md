@@ -1,6 +1,6 @@
 # solo-lu-df
 
-**Warning:** `solo-lu-df` made breaking changes in `2.0`. See the
+**⚠️Warning:** `solo-lu-df` made breaking changes in `2.0`. See the
 [migration guide](#v20-migration-guide) and [changelog](#changelog) for more
 information.
 
@@ -41,6 +41,7 @@ function. Important arguments:
 - `labels`: Optional nested dictionary of label overrides merged into the selected locale preset.
 - `outline-title`: Title for the table of contents. Defaults to `"Saturs"`.
 - `show-documentary-page`: Whether to display the documentary page at the end. Defaults to `true`.
+- `documentary-page-layout`: Documentary page layout. `"legacy"` keeps the existing layout. `"declaration"` enables the new "Apliecinājums" declaration page. Defaults to `"declaration"`.
 - `description`: Document description for PDF metadata. Defaults to `none`.
 - Positional argument: the document body follows the `ludf.with(...)` call.
 
@@ -66,6 +67,7 @@ template, you can add a show rule like this at the top of your file:
   reviewer: (title: "", name: "Prof. Anna Liepa"),
   submission-date: datetime(year: 2025, month: 1, day: 1),
   defense-date: datetime(year: 2025, month: 1, day: 15),
+  // documentary-page-layout: "legacy",
   place: "Rīga",
   bibliography: bibliography("bibliography.yml"),
   abstract: (
@@ -210,14 +212,22 @@ Common paths include:
 
 - `labels.title.page.authors.singular`
 - `labels.title.page.authors.plural`
-- `labels.title.page.student_number.prefix.singular`
-- `labels.title.page.student_number.prefix.plural`
-- `labels.title.page.student_number.label`
+- `labels.title.page.student_id.prefix.singular`
+- `labels.title.page.student_id.prefix.plural`
+- `labels.title.page.student_id.label`
 - `labels.title.page.advisors.prefix`
 - `labels.title.page.advisors.singular`
 - `labels.title.page.advisors.plural`
 - `labels.documentary.page.title`
 - `labels.documentary.page.reviewer_label`
+- `labels.documentary.page.declaration_layout.title`
+- `labels.documentary.page.declaration_layout.statement_prefix`
+- `labels.documentary.page.declaration_layout.thesis_label.bachelor`
+- `labels.documentary.page.declaration_layout.thesis_label.master`
+- `labels.documentary.page.declaration_layout.thesis_label.course`
+- `labels.documentary.page.declaration_layout.thesis_label.qualification`
+- `labels.documentary.page.declaration_layout.statement_suffix`
+- `labels.documentary.page.declaration_layout.submission_statement`
 - `labels.abstract.primary.title`
 - `labels.abstract.primary.keywords_title`
 - `labels.abstract.secondary.title`
@@ -234,13 +244,19 @@ For the full set of available labels, see [`src/locale.typ`](https://github.com/
 
 ## Changelog
 
+### v2.1.0
+
+- Added `documentary-page-layout` for selecting between the legacy documentary page and the new declaration page.
+- Refined document spacing constants for paragraph, equation, and heading layout.
+- Improved figure formatting by making captions sticky, setting caption text size, preventing image figures from breaking, and separating image/table/appendix figure rules.
+
 ### v2.0.0
 
-- **Breaking**: rename `attachment(...)` to `appendix(...)`.
-- **Breaking**: remove the `attachments` and `attachment-title` arguments. Appendices now live directly in the document body.
-- **Breaking**: replace `date` with `submission-date` and `defense-date`.
-- **Breaking**: rename `display-documentary` to `show-documentary-page`.
-- **Breaking**: place references explicitly with `#bibliography-here()`.
+- **⚠️Breaking Change**: rename `attachment(...)` to `appendix(...)`.
+- **⚠️Breaking Change**: remove the `attachments` and `attachment-title` arguments. Appendices now live directly in the document body.
+- **⚠️Breaking Change**: replace `date` with `submission-date` and `defense-date`.
+- **⚠️Breaking Change**: rename `display-documentary` to `show-documentary-page`.
+- **⚠️Breaking Change**: place references explicitly with `#bibliography-here()`.
 - Changed: clarify abstract roles and rename `keyword-title` to `keywords-title`.
 - Added: locale presets via `locale` and nested label overrides via `labels`.
 - Fixed: title-page author alignment, documentary authorized-person wording, appendix supplement localization, and appendix caption formatting.
