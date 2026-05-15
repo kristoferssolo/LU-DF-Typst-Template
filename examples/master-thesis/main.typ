@@ -1,4 +1,4 @@
-#import "@preview/solo-lu-df:2.0.0": *
+#import "@preview/solo-lu-df:2.1.0": *
 
 #show: ludf.with(
   title: "Maģistra Darba Nosaukums",

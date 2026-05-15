@@ -53,7 +53,7 @@ function in a show rule. If you want to change an existing project to use this
 template, you can add a show rule like this at the top of your file:
 
 ```typst
-#import "@preview/solo-lu-df:2.0.0": *
+#import "@preview/solo-lu-df:2.1.0": *
 
 #show: ludf.with(
   title: "Darba Nosaukums",
@@ -100,18 +100,18 @@ template, you can add a show rule like this at the top of your file:
 
 If you use `bibliography`, place `#bibliography-here()` exactly once.
 
-## v2.0 Migration Guide
+## v2 Migration Guide
 
 Apply these changes to your existing document:
 
 1. Rename `attachment(...)` to `appendix(...)`.
-2. Remove the `attachments` and `attachment-title` arguments from `ludf.with(...)`.
-3. Move appendices into the document body instead of adding them through `attachments`.
-4. Replace `date` with `submission-date` and `defense-date`.
-5. Rename `display-documentary` to `show-documentary-page`.
-6. Place `#bibliography-here()` exactly once where you want the references section to appear.
-7. If you override abstract labels, rename `keyword-title` to `keywords-title`.
-8. If you override labels, convert flat overrides to the new nested `labels` structure.
+1. Remove the `attachments` and `attachment-title` arguments from `ludf.with(...)`.
+1. Move appendices into the document body instead of adding them through `attachments`.
+1. Replace `date` with `submission-date` and `defense-date`.
+1. Rename `display-documentary` to `show-documentary-page`.
+1. Place `#bibliography-here()` exactly once where you want the references section to appear.
+1. If you override abstract labels, rename `keyword-title` to `keywords-title`.
+1. If you override labels, convert flat overrides to the new nested `labels` structure.
 
 ```diff
  #show: ludf.with(
@@ -126,7 +126,7 @@ Apply these changes to your existing document:
  )
 ```
 
-Appendix and bibliography placement in `v2.0.0`:
+Appendix and bibliography placement in `v2`:
 
 ```typst
 #bibliography-here()
@@ -149,12 +149,12 @@ Appendix and bibliography placement in `v2.0.0`:
 
 Ready-to-edit examples for different thesis types are included:
 
-- **Qualification thesis**: [`examples/qualification-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/qualification-thesis)
-- **Course work**: [`examples/course-work/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/course-work)
-- **Bachelor thesis**: [`examples/bachelor-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/bachelor-thesis)
-- **Master thesis**: [`examples/master-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples/master-thesis)
+- **Qualification thesis**: [`examples/qualification-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.1.0/examples/qualification-thesis)
+- **Course work**: [`examples/course-work/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.1.0/examples/course-work)
+- **Bachelor thesis**: [`examples/bachelor-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.1.0/examples/bachelor-thesis)
+- **Master thesis**: [`examples/master-thesis/`](https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.1.0/examples/master-thesis)
 
-Browse all examples on GitHub: <https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.0.0/examples>
+Browse all examples on GitHub: <https://github.com/kristoferssolo/LU-DF-Typst-Template/tree/v2.1.0/examples>
 
 The qualification thesis example contains `main.typ`, `bibliography.yml` and
 small helpers under `utils/`. Use it as a starting point or copy it into a new
@@ -174,7 +174,7 @@ project.
 
 Depending on your thesis content, these Typst packages can pair well with this template:
 
-- [`zero`](https://typst.app/universe/package/zero) or [`unify`](https://typst.app/universe/package/unify) for advanced scientific number and unit formatting, depending on which better fits your use case.
+- [`zero`](https://typst.app/universe/package/zero) for advanced scientific number and unit formatting, depending on which better fits your use case.
 - [`fletcher`](https://typst.app/universe/package/fletcher) for diagrams.
 - [`equate`](https://typst.app/universe/package/equate) for equation helpers.
 - [`lilaq`](https://typst.app/universe/package/lilaq) for plots.
@@ -230,7 +230,7 @@ Common paths include:
 Partial nested overrides are supported, so you only need to provide the leaf
 values you want to change.
 
-For the full set of available labels, see [`src/locale.typ`](https://github.com/kristoferssolo/LU-DF-Typst-Template/blob/v2.0.0/src/locale.typ).
+For the full set of available labels, see [`src/locale.typ`](https://github.com/kristoferssolo/LU-DF-Typst-Template/blob/v2.1.0/src/locale.typ).
 
 ## Changelog
 

@@ -1,5 +1,5 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
-#import "@preview/solo-lu-df:2.0.0": *
+#import "@preview/solo-lu-df:2.1.0": *
 #import "utils/diagrams.typ": data-store, dpd-database, dpd-edge, process
 #import "utils/tables.typ": function-table
 
