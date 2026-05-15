@@ -2,6 +2,8 @@
 #import "utils.typ": make-abstract, make-documentary-page, make-title
 
 #let bibliography-here() = metadata("ludf-bibliography-here")
+#let spacing = 0.65em
+#let line-spacing = spacing * 1.5
 
 #let appendix(caption: none, label: none, body) = {
   let fig = figure(
@@ -96,14 +98,14 @@
   // Main body.
   set par(
     justify: true,
-    leading: 0.65em * 1.5,
-    spacing: 0.65em * 1.5,
+    leading: line-spacing,
+    spacing: line-spacing,
     first-line-indent: (amount: 1cm, all: true),
   )
 
   // Configure equation numbering and spacing.
   set math.equation(numbering: "(1)")
-  show math.equation: set block(spacing: 0.65em)
+  show math.equation: set block(spacing: line-spacing)
 
   // Configure lists and terms.
   set list(marker: ([•], [--], [\*], [·]))
@@ -112,7 +114,7 @@
 
   // Headings
   set heading(numbering: "1.")
-  show heading: set block(spacing: 0.65em * 2, sticky: true)
+  show heading: set block(spacing: spacing * 2, sticky: true)
   show heading: it => {
     if it.level == 1 {
       pagebreak()
@@ -136,6 +138,7 @@
     it
   }
 
+  // all figures
   set figure(
     numbering: it => {
       let count = counter(heading).get()
@@ -146,27 +149,31 @@
   show figure: set block(breakable: true) // allow for tables to span to next pages mid sentence
   show figure: set par(justify: false) // disable justify for figures (tables)
   show figure.caption: set align(end)
-  show table.cell.where(y: 0): strong
-  set table(align: left)
+  show figure.caption: set block(sticky: true)
+  show figure.caption: set text(size: 11pt)
 
+  // images
   show figure: set image(width: 80%)
   show figure: set figure.caption(position: top, separator: " ")
 
   show figure.where(kind: image): set figure(
     supplement: labels.supplement.figure,
   )
+  show figure.where(kind: image): set block(breakable: false)
   show figure.caption.where(kind: image): set align(start)
-  show figure.caption: set block(sticky: true)
-  show figure.caption: set text(size: 11pt)
   show figure.where(kind: image): set figure.caption(
     position: bottom,
     separator: ". ",
   )
 
+  // tables
+  show table.cell.where(y: 0): strong
+  set table(align: left)
   show figure.where(kind: table): set figure(
     supplement: labels.supplement.table,
   )
 
+  // appendices
   show figure.where(kind: "appendix"): set figure(numbering: "1.")
   show figure.where(kind: "appendix"): set figure(
     supplement: labels.supplement.appendix,
