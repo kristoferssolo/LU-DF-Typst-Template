@@ -1,82 +1,110 @@
-Contributing to solo-lu-df
+# Contributing to solo-lu-df
 
-Thanks for your interest in contributing! The project follows a simple,
-developer-friendly workflow. Below are recommended steps, conventions and
-checks to make your contribution smooth and easy to review.
+Thanks for helping improve `solo-lu-df`. This project is a Typst template for
+University of Latvia Faculty of Exact Sciences computer science papers, so small
+fixes to wording, examples, layout, and documentation are useful.
 
-Getting started
+Contributions can include:
 
-1. Fork the repository and create a branch for your change:
-   - `git checkout -b feat/short-description` or `git checkout -b fix/short-description`
-1. Make changes locally and run the example build to check layout:
-   - `typst compile examples/qualification-thesis/main.typ`
-   - or run `typst watch` while editing.
+- Fixing Typst layout bugs.
+- Improving examples.
+- Updating documentation.
+- Adding or fixing locale labels.
+- Improving diagrams or assets.
 
-Reporting issues
+## Before you start
 
-- Open issues for bugs, layout regressions, feature requests or missing
-  functionality.
-- Provide:
-  - A short description of the problem.
-  - Steps to reproduce (file paths, commands).
-  - Expected vs actual behavior and screenshots/PDF snippets if helpful.
-- Use labels to categorize the issue (bug, enhancement, docs, etc.) if you
-  have permission; otherwise maintainers will tag.
+For larger changes or behavior changes, open an issue first and describe the
+problem you want to solve. This is especially useful for changes that affect the
+template API, generated document layout, or existing user projects.
 
-Pull requests
+Keep changes focused. A small documentation fix, an example update, and a layout
+change should usually be separate pull requests.
 
-- Base branch: open PRs against `main` (or other default branch).
-- PR title: use a brief prefix + summary, e.g., `feat: add attachment helper`
-  or `fix: correct table caption numbering`.
-- Describe in the PR:
-  - What you changed and why.
-  - Any user-facing changes or migration steps.
-  - How to test (commands to run).
-- Include before/after screenshots for visual changes.
+## Development setup
 
-Code style & formatting
+Install Typst before working on the template. The package metadata in
+`typst.toml` requires Typst `0.14.0`; use that version or a newer compatible
+version.
 
-- Typst source: keep the style consistent with existing files.
-- Shell examples: use fenced code blocks with `bash`.
-- Keep commits small and focused; rebase/squash as needed to keep history clean.
+This repository uses a `justfile` for local checks. There are no package-manager
+scripts required for normal template work.
 
-Testing / validation
+## Making changes
 
-- Verify examples compile cleanly:
-  - `typst compile template/main.typ`
-  - `typst compile examples/qualification-thesis/main.typ`
-- If you add diagrams or images, include both source (.drawio/.fig/.svg source)
-  and exported assets (SVG/PDF), and update README/examples as needed.
+Follow the existing structure and style:
 
-Diagrams & assets
+- Keep Typst source consistent with nearby files.
+- Prefer clear, minimal changes over broad rewrites.
+- Update examples when public usage changes.
+- Keep shell examples in fenced `bash` code blocks.
 
-- If you add diagram images exported from draw.io / Figma / Inkscape:
-  - Commit the source file (e.g., `.drawio`) AND the exported SVG/PDF.
-  - Prefer SVG/PDF exports for vector quality; ensure fonts are embedded or
-    text converted to outlines if needed for consistent rendering.
-- If you add Typst-native diagrams (fletcher), keep styles consistent with
-  existing helpers.
+When changing `src/locale.typ`, make sure new or updated labels fit the existing
+nested label structure and are documented where users need to override them.
 
-Release & versioning
+## Validation
 
-- Follow semantic versioning for releases.
-- Update `typst.toml` version and changelog when preparing a release.
+Run the relevant examples before opening a pull request. For broad layout,
+template, or documentation changes, compile all included entry points:
 
-License & copyright
+```bash
+just check
+```
 
-- All contributions are under the project MIT-0 license.
-- Don’t include third-party assets without compatible licensing. If you add
-  third-party assets, note the attribution and license in your PR.
+The `check` recipe runs:
 
-Communication
+```bash
+typst compile template/main.typ
+typst compile examples/qualification-thesis/main.typ
+typst compile examples/course-work/main.typ
+typst compile examples/bachelor-thesis/main.typ
+typst compile examples/master-thesis/main.typ
+```
 
-- For large features or breaking changes, open an issue first to discuss the
-  design; this avoids wasted work and speeds up review.
+Inspect generated PDFs when the change affects layout, figures, tables,
+appendices, title pages, documentary pages, or bibliography placement.
 
-Need help?
+If a change is intentionally limited to one example or one documentation page,
+say which commands you ran in the pull request.
 
-- Open an issue and tag it `help wanted` or `question`. Maintainers
-  will respond with guidance.
+## Reporting issues
 
-Thank you for contributing -- every fix, test, example and doc update helps
-make the template better for students and authors.
+Open an issue for bugs, layout regressions, missing functionality, unclear
+documentation, or feature requests.
+
+Include:
+
+- Typst version.
+- `solo-lu-df` package or template version, when relevant.
+- Affected file, example, or template area.
+- Steps to reproduce, including commands and file paths.
+- Expected behavior.
+- Actual behavior.
+- Screenshot or PDF snippet for layout issues, when helpful.
+
+## Pull requests
+
+In the pull request description, include:
+
+- What changed.
+- Why it changed.
+- Which template areas or examples are affected.
+- Which validation commands you ran.
+- Screenshots or PDF snippets for visual changes, when helpful.
+- Migration notes if the change affects existing users.
+
+## Documentation changes
+
+Keep documentation and examples aligned with the actual template behavior.
+
+- Update `README.md` when public usage changes.
+- Update example README files when an example changes.
+- Update usage snippets when `ludf.with(...)` arguments or helper functions
+  change.
+- Update the README migration notes when a change requires users to adjust
+  existing documents.
+
+## License
+
+Contributions are provided under the project MIT-0 license. See
+[LICENSE](./LICENSE) for the full license text.

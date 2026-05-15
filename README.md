@@ -316,4 +316,4 @@ For the full set of available labels, see [`src/locale.typ`](https://github.com/
 
 ## License
 
-This project is licensed under the MIT-0 License – see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT-0 License. See the [LICENSE](./LICENSE) file for details.
