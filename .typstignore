@@ -10,7 +10,7 @@
 .github
 scripts
 tests
-Justfile
+justfile
 examples
 CONTRIBUTING.md
 # PDF manuals should be included so that they can be linked, but not their sources

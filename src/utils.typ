@@ -110,7 +110,7 @@
     } else {
       labels.title.page.student_id.prefix.singular
     }
-    #labels.title.page.student_id.label: #authors.map(author => author.code).join(",\n")
+    #labels.title.page.student_id.label: #authors.map(author => author.code).join(", ")
 
     #if advisors.len() > 0 [
       #labels.title.page.advisors.prefix #if advisors.len() > 1 {
